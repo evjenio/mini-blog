@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="MiniBlog.WCF.Services.BlogService" CodeBehind="BlogService.svc.cs" %>
