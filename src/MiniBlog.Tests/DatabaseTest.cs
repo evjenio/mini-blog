@@ -1,4 +1,7 @@
-﻿using MiniBlog.Core.DataAccess;
+﻿using System;
+using System.Collections.Generic;
+using MiniBlog.Core.DataAccess;
+using MiniBlog.DataContract;
 using NUnit.Framework;
 
 namespace MiniBlog.Tests
@@ -10,13 +13,10 @@ namespace MiniBlog.Tests
         private const string TestDbConnectionString =
             "Server=localhost;Port=5432;Database=blog;User ID=blogUser;Password=blogblog;";
 
-        private static Database OpenDatabase() => new Database(new PgConnectionFactory(TestDbConnectionString));
-
-
         [Test]
         public void GetArticlePreviewsTest()
         {
-            var records = OpenDatabase().GetArticlePreviews();
+            IEnumerable<ArticlePreview> records = OpenDatabase().GetArticlePreviews();
 
             Assert.IsNotEmpty(records);
         }
@@ -29,5 +29,7 @@ namespace MiniBlog.Tests
             Assert.NotNull(record);
             Assert.AreEqual(id, record.Id);
         }
+
+        private static Database OpenDatabase() => new Database(new PgConnectionFactory(TestDbConnectionString));
     }
 }

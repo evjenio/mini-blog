@@ -7,33 +7,46 @@ using Npgsql;
 
 namespace MiniBlog.Core.DataAccess
 {
+    /// <inheritdoc/>
+    /// <summary>
+    /// Connection factory for PostgreSql.
+    /// </summary>
     public class PgConnectionFactory : IConnectionFactory
     {
-        private readonly string _connectionString;
+        private readonly string connectionString;
 
-        private readonly Func<string, DbConnection> _factory = conn => new NpgsqlConnection(conn);
+        private readonly Func<string, DbConnection> factory = conn => new NpgsqlConnection(conn);
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public PgConnectionFactory()
         {
-            _connectionString =
+            connectionString =
                 ConfigurationManager.ConnectionStrings["database"].ConnectionString;
         }
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="connectionString">Connection string</param>
         public PgConnectionFactory(string connectionString)
         {
-            _connectionString = connectionString;
+            this.connectionString = connectionString;
         }
 
+        /// <inheritdoc/>
         public IDbConnection Create()
         {
-            var connection = _factory(_connectionString);
+            var connection = factory(connectionString);
             connection.Open();
             return connection;
         }
 
+        /// <inheritdoc/>
         public async Task<IDbConnection> CreateAsync()
         {
-            var connection = _factory(_connectionString);
+            var connection = factory(connectionString);
             await connection.OpenAsync();
             return connection;
         }

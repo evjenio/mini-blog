@@ -16,6 +16,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		database\deploy.sql = database\deploy.sql
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniBlog.DataContract", "MiniBlog.DataContract\MiniBlog.DataContract.csproj", "{472CE167-0348-49B2-96DD-94805D54A2C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniBlog.ServiceClient", "MiniBlog.ServiceClient\MiniBlog.ServiceClient.csproj", "{47EED674-DED4-4D36-8C9E-1696836C137A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{74711E31-2737-4DFB-9C9D-DD45D9131D24} = {74711E31-2737-4DFB-9C9D-DD45D9131D24}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +45,14 @@ Global
 		{586BF692-B683-439C-BD3C-830E4C61C8C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{586BF692-B683-439C-BD3C-830E4C61C8C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{586BF692-B683-439C-BD3C-830E4C61C8C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{472CE167-0348-49B2-96DD-94805D54A2C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{472CE167-0348-49B2-96DD-94805D54A2C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{472CE167-0348-49B2-96DD-94805D54A2C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{472CE167-0348-49B2-96DD-94805D54A2C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47EED674-DED4-4D36-8C9E-1696836C137A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47EED674-DED4-4D36-8C9E-1696836C137A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47EED674-DED4-4D36-8C9E-1696836C137A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47EED674-DED4-4D36-8C9E-1696836C137A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

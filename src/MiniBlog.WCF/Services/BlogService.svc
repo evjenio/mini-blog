@@ -1,1 +1,2 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="MiniBlog.WCF.Services.BlogService" CodeBehind="BlogService.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="MiniBlog.WCF.Services.BlogService, MiniBlog.WCF" CodeBehind="BlogService.svc.cs" 
+    Factory="Autofac.Integration.Wcf.AutofacServiceHostFactory, Autofac.Integration.Wcf" %>

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{586BF692-B683-439C-BD3C-830E4C61C8C1}</ProjectGuid>
+    <ProjectGuid>{47EED674-DED4-4D36-8C9E-1696836C137A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MiniBlog.Tests</RootNamespace>
-    <AssemblyName>MiniBlog.Tests</AssemblyName>
+    <RootNamespace>MiniBlog.ServiceClient</RootNamespace>
+    <AssemblyName>MiniBlog.ServiceClient</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,24 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Moq, Version=4.8.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.4.8.2\lib\net45\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.9.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,17 +42,56 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseTest.cs" />
+    <Compile Include="Connected Services\Integration\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MiniBlog.Core\MiniBlog.Core.csproj">
-      <Project>{a5e53d2b-1f64-461e-bc40-95fcd231b12f}</Project>
-      <Name>MiniBlog.Core</Name>
-    </ProjectReference>
+    <None Include="app.config" />
+    <None Include="Connected Services\Integration\BlogService.wsdl" />
+    <None Include="Connected Services\Integration\BlogService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\Integration\BlogService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\Integration\BlogService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\Integration\BlogService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\Integration\MiniBlog.ServiceClient.Integration.Article.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Integration\MiniBlog.ServiceClient.Integration.ArticlePreview.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\MiniBlog.Model.Article.datasource" />
+    <None Include="Properties\DataSources\MiniBlog.Model.ArticlePreview.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\Integration\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Integration\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Integration\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Integration\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\MiniBlog.DataContract\MiniBlog.DataContract.csproj">
       <Project>{472ce167-0348-49b2-96dd-94805d54a2c2}</Project>
       <Name>MiniBlog.DataContract</Name>

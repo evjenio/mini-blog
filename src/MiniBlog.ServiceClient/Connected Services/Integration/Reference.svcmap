@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="174d1f1d-57cb-4d6c-b15a-5add1923d641" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="MiniBlog.DataContract" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:49542/Services/BlogService.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="BlogService.xsd" MetadataType="Schema" ID="5f29a7d6-c26c-4762-a5d1-77df12ef7a7b" SourceId="1" SourceUrl="http://localhost:49542/Services/BlogService.svc?xsd=xsd3" />
+    <MetadataFile FileName="BlogService1.xsd" MetadataType="Schema" ID="70e7e5b1-ab1f-43e4-8ca4-7e479161140d" SourceId="1" SourceUrl="http://localhost:49542/Services/BlogService.svc?xsd=xsd1" />
+    <MetadataFile FileName="BlogService2.xsd" MetadataType="Schema" ID="b98cca9c-69d0-453c-a95a-f5c588f03555" SourceId="1" SourceUrl="http://localhost:49542/Services/BlogService.svc?xsd=xsd0" />
+    <MetadataFile FileName="BlogService3.xsd" MetadataType="Schema" ID="40eeb1f4-fb59-4d55-9ece-bb67fa4ec932" SourceId="1" SourceUrl="http://localhost:49542/Services/BlogService.svc?xsd=xsd2" />
+    <MetadataFile FileName="BlogService.wsdl" MetadataType="Wsdl" ID="6d32d57a-ac31-46b3-ab1a-23e27b02ca07" SourceId="1" SourceUrl="http://localhost:49542/Services/BlogService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

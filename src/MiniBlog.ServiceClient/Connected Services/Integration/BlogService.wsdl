@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BlogService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:49542/Services/BlogService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:49542/Services/BlogService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model" />
+      <xsd:import schemaLocation="http://localhost:49542/Services/BlogService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:49542/Services/BlogService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MiniBlog.Model" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IBlogService_AddArticle_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddArticle" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_AddArticle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddArticleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_AddArticle_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model" name="detail" element="q1:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_AddComment_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddComment" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_AddComment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCommentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_AddComment_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model" name="detail" element="q2:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_DeleteArticle_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteArticle" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_DeleteArticle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteArticleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_DeleteArticle_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model" name="detail" element="q3:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetArticle_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetArticle" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetArticle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetArticleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetArticle_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model" name="detail" element="q4:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetArticlePreviews_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetArticlePreviews" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetArticlePreviews_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetArticlePreviewsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBlogService_GetArticlePreviews_ServiceFaultMessageFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model" name="detail" element="q5:ServiceFaultMessage" />
+  </wsdl:message>
+  <wsdl:portType name="IBlogService">
+    <wsdl:operation name="AddArticle">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/AddArticle" message="tns:IBlogService_AddArticle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/AddArticleResponse" message="tns:IBlogService_AddArticle_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IBlogService/AddArticleServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IBlogService_AddArticle_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddComment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/AddComment" message="tns:IBlogService_AddComment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/AddCommentResponse" message="tns:IBlogService_AddComment_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IBlogService/AddCommentServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IBlogService_AddComment_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteArticle">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/DeleteArticle" message="tns:IBlogService_DeleteArticle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/DeleteArticleResponse" message="tns:IBlogService_DeleteArticle_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IBlogService/DeleteArticleServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IBlogService_DeleteArticle_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetArticle">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/GetArticle" message="tns:IBlogService_GetArticle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/GetArticleResponse" message="tns:IBlogService_GetArticle_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IBlogService/GetArticleServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IBlogService_GetArticle_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetArticlePreviews">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBlogService/GetArticlePreviews" message="tns:IBlogService_GetArticlePreviews_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBlogService/GetArticlePreviewsResponse" message="tns:IBlogService_GetArticlePreviews_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IBlogService/GetArticlePreviewsServiceFaultMessageFault" name="ServiceFaultMessageFault" message="tns:IBlogService_GetArticlePreviews_ServiceFaultMessageFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IBlogService" type="tns:IBlogService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddArticle">
+      <soap:operation soapAction="http://tempuri.org/IBlogService/AddArticle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AddComment">
+      <soap:operation soapAction="http://tempuri.org/IBlogService/AddComment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteArticle">
+      <soap:operation soapAction="http://tempuri.org/IBlogService/DeleteArticle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetArticle">
+      <soap:operation soapAction="http://tempuri.org/IBlogService/GetArticle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetArticlePreviews">
+      <soap:operation soapAction="http://tempuri.org/IBlogService/GetArticlePreviews" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultMessageFault">
+        <soap:fault use="literal" name="ServiceFaultMessageFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BlogService">
+    <wsdl:port name="BasicHttpBinding_IBlogService" binding="tns:BasicHttpBinding_IBlogService">
+      <soap:address location="http://localhost:49542/Services/BlogService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
