@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using System.Web;
 using Autofac;
 using Autofac.Integration.Wcf;
 using MiniBlog.Core.DataAccess;
+using MiniBlog.Core.Mappers;
 using MiniBlog.WCF.ErrorHandling;
 using MiniBlog.WCF.Services;
 using Serilog;
@@ -26,6 +28,7 @@ namespace MiniBlog.WCF
             builder.RegisterType<Database>();
             builder.RegisterType<PgConnectionFactory>().As<IConnectionFactory>();
             builder.RegisterType<GlobalErrorHandler>();
+            builder.RegisterType<ObjectMapper>().As<IObjectMapper>();
 
             builder.Register<ILogger>(c => new LoggerConfiguration()
                     .MinimumLevel.Verbose()

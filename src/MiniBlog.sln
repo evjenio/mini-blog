@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniBlog.ServiceClient", "M
 		{74711E31-2737-4DFB-9C9D-DD45D9131D24} = {74711E31-2737-4DFB-9C9D-DD45D9131D24}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniBlog.UI.Core", "MiniBlog.UI.Core\MiniBlog.UI.Core.csproj", "{57D74160-99BB-4DFC-9A2E-8AA2890E3654}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{47EED674-DED4-4D36-8C9E-1696836C137A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47EED674-DED4-4D36-8C9E-1696836C137A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47EED674-DED4-4D36-8C9E-1696836C137A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57D74160-99BB-4DFC-9A2E-8AA2890E3654}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57D74160-99BB-4DFC-9A2E-8AA2890E3654}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57D74160-99BB-4DFC-9A2E-8AA2890E3654}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57D74160-99BB-4DFC-9A2E-8AA2890E3654}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

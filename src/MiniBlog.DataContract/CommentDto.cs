@@ -7,7 +7,7 @@ namespace MiniBlog.DataContract
     /// Comment.
     /// </summary>
     [DataContract]
-    public class Comment
+    public class CommentDto
     {
         /// <summary>
         /// Comment text.

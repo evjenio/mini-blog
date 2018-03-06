@@ -55,9 +55,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Connected Services\Integration\BlogService.wsdl" />
-    <None Include="Connected Services\Integration\BlogService.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\Integration\BlogService1.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -67,12 +64,8 @@
     <None Include="Connected Services\Integration\BlogService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Integration\MiniBlog.ServiceClient.Integration.Article.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\Integration\MiniBlog.ServiceClient.Integration.ArticlePreview.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
+    <None Include="Properties\DataSources\MiniBlog.DataContract.ArticleDto.datasource" />
+    <None Include="Properties\DataSources\MiniBlog.DataContract.ArticlePreviewDto.datasource" />
     <None Include="Properties\DataSources\MiniBlog.Model.Article.datasource" />
     <None Include="Properties\DataSources\MiniBlog.Model.ArticlePreview.datasource" />
   </ItemGroup>

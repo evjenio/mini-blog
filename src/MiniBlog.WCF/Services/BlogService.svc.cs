@@ -2,6 +2,8 @@
 using System.Diagnostics.Contracts;
 using System.Linq;
 using MiniBlog.Core.DataAccess;
+using MiniBlog.Core.DataAccess.Model;
+using MiniBlog.Core.Mappers;
 using MiniBlog.DataContract;
 using MiniBlog.WCF.ErrorHandling;
 using Serilog;
@@ -15,16 +17,19 @@ namespace MiniBlog.WCF.Services
     public class BlogService : IBlogService
     {
         private readonly Database database;
+        private readonly IObjectMapper objectMapper;
         private readonly ILogger logger;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="database">DB</param>
+        /// <param name="objectMapper"></param>
         /// <param name="logger">Logger</param>
-        public BlogService(Database database, ILogger logger)
+        public BlogService(Database database, IObjectMapper objectMapper, ILogger logger)
         {
             this.database = database;
+            this.objectMapper = objectMapper;
             this.logger = logger;
         }
 
@@ -32,11 +37,12 @@ namespace MiniBlog.WCF.Services
         /// Adds article.
         /// </summary>
         /// <param name="article">article</param>
-        public void AddArticle(Article article)
+        public void AddArticle(ArticleDto article)
         {
-            System.Diagnostics.Contracts.Contract.Requires(article != null);
+            Contract.Requires(article != null);
             logger.Verbose("Adding article with header: {@header}", article.Header);
-            database.AddArticle(article);
+            var mappedArticle = objectMapper.Map<ArticleDto, Article>(article);
+            database.AddArticle(mappedArticle);
         }
 
         /// <summary>
@@ -66,18 +72,20 @@ namespace MiniBlog.WCF.Services
         /// </summary>
         /// <param name="articleId">Article identity</param>
         /// <returns>Article object</returns>
-        public Article GetArticle(int articleId)
+        public ArticleDto GetArticle(int articleId)
         {
-            return database.GetArticle(articleId);
+            var article = database.GetArticle(articleId);
+            return objectMapper.Map<Article, ArticleDto>(article);
         }
 
         /// <summary>
         /// Gets articles.
         /// </summary>
         /// <returns>List of articles</returns>
-        public ArticlePreview[] GetArticlePreviews()
+        public ArticlePreviewDto[] GetArticlePreviews()
         {
-            return database.GetArticlePreviews().ToArray();
+            ArticlePreview[] articles = database.GetArticlePreviews().ToArray();
+            return objectMapper.Map<ArticlePreview[], ArticlePreviewDto[]>(articles);
         }
     }
 }

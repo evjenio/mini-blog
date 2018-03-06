@@ -3,9 +3,8 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:49542/Services/BlogService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:49542/Services/BlogService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model" />
+      <xsd:import schemaLocation="http://localhost:49542/Services/BlogService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract" />
       <xsd:import schemaLocation="http://localhost:49542/Services/BlogService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:49542/Services/BlogService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MiniBlog.Model" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IBlogService_AddArticle_InputMessage">
@@ -15,7 +14,7 @@
     <wsdl:part name="parameters" element="tns:AddArticleResponse" />
   </wsdl:message>
   <wsdl:message name="IBlogService_AddArticle_ServiceFaultMessageFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model" name="detail" element="q1:ServiceFaultMessage" />
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract" name="detail" element="q1:ServiceFaultMessage" />
   </wsdl:message>
   <wsdl:message name="IBlogService_AddComment_InputMessage">
     <wsdl:part name="parameters" element="tns:AddComment" />
@@ -24,7 +23,7 @@
     <wsdl:part name="parameters" element="tns:AddCommentResponse" />
   </wsdl:message>
   <wsdl:message name="IBlogService_AddComment_ServiceFaultMessageFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model" name="detail" element="q2:ServiceFaultMessage" />
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract" name="detail" element="q2:ServiceFaultMessage" />
   </wsdl:message>
   <wsdl:message name="IBlogService_DeleteArticle_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteArticle" />
@@ -33,7 +32,7 @@
     <wsdl:part name="parameters" element="tns:DeleteArticleResponse" />
   </wsdl:message>
   <wsdl:message name="IBlogService_DeleteArticle_ServiceFaultMessageFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model" name="detail" element="q3:ServiceFaultMessage" />
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract" name="detail" element="q3:ServiceFaultMessage" />
   </wsdl:message>
   <wsdl:message name="IBlogService_GetArticle_InputMessage">
     <wsdl:part name="parameters" element="tns:GetArticle" />
@@ -42,7 +41,7 @@
     <wsdl:part name="parameters" element="tns:GetArticleResponse" />
   </wsdl:message>
   <wsdl:message name="IBlogService_GetArticle_ServiceFaultMessageFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model" name="detail" element="q4:ServiceFaultMessage" />
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract" name="detail" element="q4:ServiceFaultMessage" />
   </wsdl:message>
   <wsdl:message name="IBlogService_GetArticlePreviews_InputMessage">
     <wsdl:part name="parameters" element="tns:GetArticlePreviews" />
@@ -51,7 +50,7 @@
     <wsdl:part name="parameters" element="tns:GetArticlePreviewsResponse" />
   </wsdl:message>
   <wsdl:message name="IBlogService_GetArticlePreviews_ServiceFaultMessageFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model" name="detail" element="q5:ServiceFaultMessage" />
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract" name="detail" element="q5:ServiceFaultMessage" />
   </wsdl:message>
   <wsdl:portType name="IBlogService">
     <wsdl:operation name="AddArticle">

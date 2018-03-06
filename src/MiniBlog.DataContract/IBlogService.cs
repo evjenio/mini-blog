@@ -14,7 +14,7 @@ namespace MiniBlog.DataContract
         /// </summary>
         [OperationContract]
         [FaultContract(typeof(ServiceFaultMessage))]
-        void AddArticle(Article article);
+        void AddArticle(ArticleDto article);
 
         /// <summary>
         /// Adds comment.
@@ -41,7 +41,7 @@ namespace MiniBlog.DataContract
         /// <returns>Article object</returns>
         [OperationContract]
         [FaultContract(typeof(ServiceFaultMessage))]
-        Article GetArticle(int articleId);
+        ArticleDto GetArticle(int articleId);
 
         /// <summary>
         /// Gets articles.
@@ -49,6 +49,6 @@ namespace MiniBlog.DataContract
         /// <returns>List of articles</returns>
         [OperationContract]
         [FaultContract(typeof(ServiceFaultMessage))]
-        ArticlePreview[] GetArticlePreviews();
+        ArticlePreviewDto[] GetArticlePreviews();
     }
 }

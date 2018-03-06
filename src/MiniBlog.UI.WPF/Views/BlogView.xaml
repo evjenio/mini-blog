@@ -1,0 +1,73 @@
+﻿<views:MvxWpfView x:Class="MiniBlog.UI.WPF.Views.BlogView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="clr-namespace:MvvmCross.Wpf.Views;assembly=MvvmCross.Wpf"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MiniBlog.UI.WPF.Views"
+             xmlns:viewModels="clr-namespace:MiniBlog.UI.Core.ViewModels;assembly=MiniBlog.UI.Core"
+             xmlns:converters="clr-namespace:MiniBlog.UI.WPF.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500"
+             d:DataContext="{d:DesignInstance viewModels:BlogViewModel}">
+    <views:MvxWpfView.Resources>
+        <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
+        <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+    </views:MvxWpfView.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ListView ItemsSource="{Binding Articles}" SelectedItem="{Binding SelectedArticlePreview, Mode=TwoWay}" BorderThickness="0 0 1 0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="0 0 0 1" BorderBrush="{StaticResource GridSplitterBorderBrush}">
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="{Binding Header}" SnapsToDevicePixels="False" TextTrimming="CharacterEllipsis"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <ScrollViewer Grid.Column="1" Margin="10">
+            <StackPanel>
+                <Border BorderThickness="0 0 0 1" BorderBrush="{StaticResource GridSplitterBorderBrush}">
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                        <Image Source="{Binding Picture, TargetNullValue={x:Null}}" Height="64" Width="64" Visibility="{Binding Picture, Converter={StaticResource NullToVisibilityConverter}}"/>
+                        <Label Content="{Binding Path=SelectedArticlePreview.Header}" VerticalAlignment="Center" Margin="5" FontSize="18" FontWeight="SemiBold" SnapsToDevicePixels="False"/>
+                    </StackPanel>
+                </Border>
+                <TextBlock Text="{Binding ArticleText}" Margin="0 10" TextAlignment="Left" TextWrapping="Wrap" FontSize="13" SnapsToDevicePixels="False"/>
+                <StackPanel Visibility="{Binding Path=Comments.Count, Converter={StaticResource IntToVisibilityConverter}}">
+                    <Label Content="Comments"/>
+                    <ItemsControl ItemsSource="{Binding Comments}" BorderThickness="0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Border BorderThickness="1 1 1 0" CornerRadius="5 5 0 0" BorderBrush="{StaticResource Brush01}" Background="{StaticResource Brush01}">
+                                        <Label Content="{Binding UserName}" Foreground="{StaticResource ButtonBackgroundBrush}"/>
+                                    </Border>
+                                    <Border BorderThickness="1 0 1 1" CornerRadius="0 0 5 5" BorderBrush="{StaticResource Brush01}">
+                                        <Label Content="{Binding CommentText}"/>
+                                    </Border>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemContainerStyle>
+                            <Style>
+                                <Setter Property="Control.HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Control.Margin" Value="0 0 0 10"/>
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+                    </ItemsControl>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</views:MvxWpfView>

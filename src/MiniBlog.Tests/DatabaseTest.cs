@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MiniBlog.Core.DataAccess;
-using MiniBlog.DataContract;
+using MiniBlog.Core.DataAccess.Model;
 using NUnit.Framework;
 
 namespace MiniBlog.Tests

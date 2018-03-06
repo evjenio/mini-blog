@@ -4,7 +4,7 @@ using System.Data;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using Dapper;
-using MiniBlog.DataContract;
+using MiniBlog.Core.DataAccess.Model;
 using Nelibur.Sword.DataStructures;
 using Nelibur.Sword.Extensions;
 

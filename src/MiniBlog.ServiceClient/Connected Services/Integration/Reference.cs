@@ -9,271 +9,46 @@
 //------------------------------------------------------------------------------
 
 namespace MiniBlog.ServiceClient.Integration {
-    using System.Runtime.Serialization;
-    using System;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ArticlePreview", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.Model")]
-    [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(MiniBlog.ServiceClient.Integration.Article))]
-    public partial class ArticlePreview : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string HeaderField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Header {
-            get {
-                return this.HeaderField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.HeaderField, value) != true)) {
-                    this.HeaderField = value;
-                    this.RaisePropertyChanged("Header");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Article", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.Model")]
-    [System.SerializableAttribute()]
-    public partial class Article : MiniBlog.ServiceClient.Integration.ArticlePreview {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private MiniBlog.ServiceClient.Integration.Comment[] CommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ContentField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte[] ImageField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public MiniBlog.ServiceClient.Integration.Comment[] Comments {
-            get {
-                return this.CommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CommentsField, value) != true)) {
-                    this.CommentsField = value;
-                    this.RaisePropertyChanged("Comments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Content {
-            get {
-                return this.ContentField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ContentField, value) != true)) {
-                    this.ContentField = value;
-                    this.RaisePropertyChanged("Content");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] Image {
-            get {
-                return this.ImageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ImageField, value) != true)) {
-                    this.ImageField = value;
-                    this.RaisePropertyChanged("Image");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Comment", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.Model")]
-    [System.SerializableAttribute()]
-    public partial class Comment : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CommentTextField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UserNameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CommentText {
-            get {
-                return this.CommentTextField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CommentTextField, value) != true)) {
-                    this.CommentTextField = value;
-                    this.RaisePropertyChanged("CommentText");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string UserName {
-            get {
-                return this.UserNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
-                    this.UserNameField = value;
-                    this.RaisePropertyChanged("UserName");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model")]
-    [System.SerializableAttribute()]
-    public partial class ServiceFaultMessage : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MessageField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message {
-            get {
-                return this.MessageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
-                    this.MessageField = value;
-                    this.RaisePropertyChanged("Message");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Integration.IBlogService")]
     public interface IBlogService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/AddArticle", ReplyAction="http://tempuri.org/IBlogService/AddArticleResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MiniBlog.ServiceClient.Integration.ServiceFaultMessage), Action="http://tempuri.org/IBlogService/AddArticleServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model")]
-        void AddArticle(MiniBlog.ServiceClient.Integration.Article article);
+        [System.ServiceModel.FaultContractAttribute(typeof(MiniBlog.DataContract.ServiceFaultMessage), Action="http://tempuri.org/IBlogService/AddArticleServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract")]
+        void AddArticle(MiniBlog.DataContract.ArticleDto article);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/AddArticle", ReplyAction="http://tempuri.org/IBlogService/AddArticleResponse")]
-        System.Threading.Tasks.Task AddArticleAsync(MiniBlog.ServiceClient.Integration.Article article);
+        System.Threading.Tasks.Task AddArticleAsync(MiniBlog.DataContract.ArticleDto article);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/AddComment", ReplyAction="http://tempuri.org/IBlogService/AddCommentResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MiniBlog.ServiceClient.Integration.ServiceFaultMessage), Action="http://tempuri.org/IBlogService/AddCommentServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MiniBlog.DataContract.ServiceFaultMessage), Action="http://tempuri.org/IBlogService/AddCommentServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract")]
         void AddComment(int articleId, string commentText, string userName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/AddComment", ReplyAction="http://tempuri.org/IBlogService/AddCommentResponse")]
         System.Threading.Tasks.Task AddCommentAsync(int articleId, string commentText, string userName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/DeleteArticle", ReplyAction="http://tempuri.org/IBlogService/DeleteArticleResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MiniBlog.ServiceClient.Integration.ServiceFaultMessage), Action="http://tempuri.org/IBlogService/DeleteArticleServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model")]
+        [System.ServiceModel.FaultContractAttribute(typeof(MiniBlog.DataContract.ServiceFaultMessage), Action="http://tempuri.org/IBlogService/DeleteArticleServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract")]
         void DeleteArticle(int articleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/DeleteArticle", ReplyAction="http://tempuri.org/IBlogService/DeleteArticleResponse")]
         System.Threading.Tasks.Task DeleteArticleAsync(int articleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/GetArticle", ReplyAction="http://tempuri.org/IBlogService/GetArticleResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MiniBlog.ServiceClient.Integration.ServiceFaultMessage), Action="http://tempuri.org/IBlogService/GetArticleServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model")]
-        MiniBlog.ServiceClient.Integration.Article GetArticle(int articleId);
+        [System.ServiceModel.FaultContractAttribute(typeof(MiniBlog.DataContract.ServiceFaultMessage), Action="http://tempuri.org/IBlogService/GetArticleServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract")]
+        MiniBlog.DataContract.ArticleDto GetArticle(int articleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/GetArticle", ReplyAction="http://tempuri.org/IBlogService/GetArticleResponse")]
-        System.Threading.Tasks.Task<MiniBlog.ServiceClient.Integration.Article> GetArticleAsync(int articleId);
+        System.Threading.Tasks.Task<MiniBlog.DataContract.ArticleDto> GetArticleAsync(int articleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/GetArticlePreviews", ReplyAction="http://tempuri.org/IBlogService/GetArticlePreviewsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MiniBlog.ServiceClient.Integration.ServiceFaultMessage), Action="http://tempuri.org/IBlogService/GetArticlePreviewsServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.WCF.Model")]
-        MiniBlog.ServiceClient.Integration.ArticlePreview[] GetArticlePreviews();
+        [System.ServiceModel.FaultContractAttribute(typeof(MiniBlog.DataContract.ServiceFaultMessage), Action="http://tempuri.org/IBlogService/GetArticlePreviewsServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract")]
+        MiniBlog.DataContract.ArticlePreviewDto[] GetArticlePreviews();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/GetArticlePreviews", ReplyAction="http://tempuri.org/IBlogService/GetArticlePreviewsResponse")]
-        System.Threading.Tasks.Task<MiniBlog.ServiceClient.Integration.ArticlePreview[]> GetArticlePreviewsAsync();
+        System.Threading.Tasks.Task<MiniBlog.DataContract.ArticlePreviewDto[]> GetArticlePreviewsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -303,11 +78,11 @@ namespace MiniBlog.ServiceClient.Integration {
                 base(binding, remoteAddress) {
         }
         
-        public void AddArticle(MiniBlog.ServiceClient.Integration.Article article) {
+        public void AddArticle(MiniBlog.DataContract.ArticleDto article) {
             base.Channel.AddArticle(article);
         }
         
-        public System.Threading.Tasks.Task AddArticleAsync(MiniBlog.ServiceClient.Integration.Article article) {
+        public System.Threading.Tasks.Task AddArticleAsync(MiniBlog.DataContract.ArticleDto article) {
             return base.Channel.AddArticleAsync(article);
         }
         
@@ -327,19 +102,19 @@ namespace MiniBlog.ServiceClient.Integration {
             return base.Channel.DeleteArticleAsync(articleId);
         }
         
-        public MiniBlog.ServiceClient.Integration.Article GetArticle(int articleId) {
+        public MiniBlog.DataContract.ArticleDto GetArticle(int articleId) {
             return base.Channel.GetArticle(articleId);
         }
         
-        public System.Threading.Tasks.Task<MiniBlog.ServiceClient.Integration.Article> GetArticleAsync(int articleId) {
+        public System.Threading.Tasks.Task<MiniBlog.DataContract.ArticleDto> GetArticleAsync(int articleId) {
             return base.Channel.GetArticleAsync(articleId);
         }
         
-        public MiniBlog.ServiceClient.Integration.ArticlePreview[] GetArticlePreviews() {
+        public MiniBlog.DataContract.ArticlePreviewDto[] GetArticlePreviews() {
             return base.Channel.GetArticlePreviews();
         }
         
-        public System.Threading.Tasks.Task<MiniBlog.ServiceClient.Integration.ArticlePreview[]> GetArticlePreviewsAsync() {
+        public System.Threading.Tasks.Task<MiniBlog.DataContract.ArticlePreviewDto[]> GetArticlePreviewsAsync() {
             return base.Channel.GetArticlePreviewsAsync();
         }
     }
