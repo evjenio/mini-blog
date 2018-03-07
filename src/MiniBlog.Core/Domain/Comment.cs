@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace MiniBlog.Core.DataAccess.Model
+namespace MiniBlog.Core.Domain
 {
     /// <summary>
     /// Comment.
     /// </summary>
-    public class Comment
+    public class Comment : IEntity<int>
     {
         /// <summary>
         /// Identity.
@@ -20,5 +20,10 @@ namespace MiniBlog.Core.DataAccess.Model
         /// UserName.
         /// </summary>
         public string UserName { get; set; }
+
+        /// <summary>
+        /// Article Identity.
+        /// </summary>
+        public int ArticleId { get; set; }
     }
 }

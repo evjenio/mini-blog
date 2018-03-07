@@ -16,4 +16,12 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DataAccess\Repositories\NHibernate\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MiniBlog.DataContract\MiniBlog.DataContract.csproj" />
+  </ItemGroup>
+
 </Project>

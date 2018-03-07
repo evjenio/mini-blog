@@ -4,6 +4,8 @@ using System.Web;
 using Autofac;
 using Autofac.Integration.Wcf;
 using MiniBlog.Core.DataAccess;
+using MiniBlog.Core.DataAccess.Repositories;
+using MiniBlog.Core.DataAccess.Repositories.Dapper;
 using MiniBlog.Core.Mappers;
 using MiniBlog.WCF.ErrorHandling;
 using MiniBlog.WCF.Services;
@@ -26,9 +28,12 @@ namespace MiniBlog.WCF
 
             // Register dependencies.
             builder.RegisterType<Database>();
-            builder.RegisterType<PgConnectionFactory>().As<IConnectionFactory>();
-            builder.RegisterType<GlobalErrorHandler>();
-            builder.RegisterType<ObjectMapper>().As<IObjectMapper>();
+            builder.RegisterType<PgConnectionFactory>().As<IConnectionFactory>().SingleInstance();
+            builder.RegisterType<GlobalErrorHandler>().SingleInstance();
+            builder.RegisterType<ObjectMapper>().As<IObjectMapper>().SingleInstance();
+
+            builder.RegisterType<RepositoryFactory>().As<IRepositoryFactory>().SingleInstance();
+            builder.RegisterType<UnitOfWorkFactory>().As<IUnitOfWorkFactory>().SingleInstance();
 
             builder.Register<ILogger>(c => new LoggerConfiguration()
                     .MinimumLevel.Verbose()

@@ -2,7 +2,7 @@
 using System.Diagnostics.Contracts;
 using System.Linq;
 using MiniBlog.Core.DataAccess;
-using MiniBlog.Core.DataAccess.Model;
+using MiniBlog.Core.Domain;
 using MiniBlog.Core.Mappers;
 using MiniBlog.DataContract;
 using MiniBlog.WCF.ErrorHandling;

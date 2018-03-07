@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MiniBlog.Core.DataAccess.Model
+namespace MiniBlog.Core.Domain
 {
     /// <summary>
     /// Article.
     /// </summary>
-    public class Article : ArticlePreview
+    public class Article : IEntity<int>
     {
         /// <summary>
         /// List of comments.
@@ -19,8 +19,18 @@ namespace MiniBlog.Core.DataAccess.Model
         public string Content { get; set; }
 
         /// <summary>
+        /// Article header.
+        /// </summary>
+        public string Header { get; set; }
+
+        /// <summary>
+        /// Article identity.
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// Image.
         /// </summary>
-        public byte[] Image { get; set; }
+        public Image Image { get; set; }
     }
 }
