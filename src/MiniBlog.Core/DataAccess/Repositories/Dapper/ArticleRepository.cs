@@ -18,7 +18,7 @@ namespace MiniBlog.Core.DataAccess.Repositories.Dapper
             const string sql = @"INSERT INTO public.articles (header, content, imageid) 
                                             VALUES (@header, @content, @imageid) 
                                             RETURNING id";
-            var parameters = new { header = entity.Header, content = entity.Content, imageid = entity.Image?.Id };
+            var parameters = new { header = entity.Header, content = entity.Content, imageid = entity.ImageId };
             var id = Connection.QueryFirst<int>(sql, parameters, Transaction);
             entity.Id = id;
             return id;

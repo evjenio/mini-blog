@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
-using System.Linq;
-using MiniBlog.Core.DataAccess;
-using MiniBlog.Core.Domain;
-using MiniBlog.Core.Mappers;
+using MiniBlog.Core;
 using MiniBlog.DataContract;
 using MiniBlog.WCF.ErrorHandling;
-using Serilog;
 
 namespace MiniBlog.WCF.Services
 {
@@ -16,21 +12,14 @@ namespace MiniBlog.WCF.Services
     [GlobalErrorBehavior(typeof(GlobalErrorHandler))]
     public class BlogService : IBlogService
     {
-        private readonly Database database;
-        private readonly IObjectMapper objectMapper;
-        private readonly ILogger logger;
+        private readonly IBlog blog;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="database">DB</param>
-        /// <param name="objectMapper"></param>
-        /// <param name="logger">Logger</param>
-        public BlogService(Database database, IObjectMapper objectMapper, ILogger logger)
+        public BlogService(IBlog blog)
         {
-            this.database = database;
-            this.objectMapper = objectMapper;
-            this.logger = logger;
+            this.blog = blog;
         }
 
         /// <summary>
@@ -40,21 +29,16 @@ namespace MiniBlog.WCF.Services
         public void AddArticle(ArticleDto article)
         {
             Contract.Requires(article != null);
-            logger.Verbose("Adding article with header: {@header}", article.Header);
-            var mappedArticle = objectMapper.Map<ArticleDto, Article>(article);
-            database.AddArticle(mappedArticle);
+            blog.AddArticle(article);
         }
 
         /// <summary>
         /// Adds comment.
         /// </summary>
-        /// <param name="articleId">Article identity</param>
-        /// <param name="commentText">Comment text</param>
-        /// <param name="userName">User name</param>
-        public void AddComment(int articleId, string commentText, string userName)
+        /// <param name="comment">Comment object</param>
+        public void AddComment(CommentDto comment)
         {
-            logger.Verbose("Adding comment \"{@comment}\" from {@userName} to article {@articleId}", commentText, userName, articleId);
-            database.AddComment(articleId, commentText, userName);
+            blog.AddComment(comment);
         }
 
         /// <summary>
@@ -63,8 +47,7 @@ namespace MiniBlog.WCF.Services
         /// <param name="articleId">Article identity</param>
         public void DeleteArticle(int articleId)
         {
-            logger.Verbose("Deleting article {@articleId}", articleId);
-            database.DeleteArticle(articleId);
+            blog.DeleteArticle(articleId);
         }
 
         /// <summary>
@@ -74,8 +57,7 @@ namespace MiniBlog.WCF.Services
         /// <returns>Article object</returns>
         public ArticleDto GetArticle(int articleId)
         {
-            var article = database.GetArticle(articleId);
-            return objectMapper.Map<Article, ArticleDto>(article);
+            return blog.GetArticle(articleId);
         }
 
         /// <summary>
@@ -84,8 +66,7 @@ namespace MiniBlog.WCF.Services
         /// <returns>List of articles</returns>
         public ArticlePreviewDto[] GetArticlePreviews()
         {
-            ArticlePreview[] articles = database.GetArticlePreviews().ToArray();
-            return objectMapper.Map<ArticlePreview[], ArticlePreviewDto[]>(articles);
+            return blog.GetArticlePreviews();
         }
     }
 }

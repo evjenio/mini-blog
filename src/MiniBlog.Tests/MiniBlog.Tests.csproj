@@ -56,7 +56,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseTest.cs" />
+    <Compile Include="DataAccess\Repositories\Dapper\ArticleRepositoryTest.cs" />
+    <Compile Include="DataAccess\Repositories\Dapper\CommentRepositoryTest.cs" />
+    <Compile Include="DataAccess\Repositories\Dapper\ImageRepositoryTest.cs" />
+    <Compile Include="DataAccess\Repositories\Dapper\TestDb.cs" />
+    <Compile Include="DataAccess\Repositories\RepositoryTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

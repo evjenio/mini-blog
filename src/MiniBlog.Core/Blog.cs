@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using MiniBlog.Core.DataAccess;
 using MiniBlog.Core.Domain;
@@ -35,7 +36,7 @@ namespace MiniBlog.Core
                     {
                         var img = new Image() { ImageFile = file };
                         unitOfWork.ImageRepository.Add(img);
-                        mappedArticle.Image = img;
+                        mappedArticle.ImageId = img.Id;
                     });
 
                 unitOfWork.ArticleRepository.Add(mappedArticle);
@@ -73,14 +74,31 @@ namespace MiniBlog.Core
             using (var unitOfWork = unitOfWorkFactory.Create())
             {
                 var article = unitOfWork.ArticleRepository.Get(articleId);
+                var mappedArticle = objectMapper.Map<Article, ArticleDto>(article);
+
+                if (article.ImageId.HasValue)
+                {
+                    var image = unitOfWork.ImageRepository.Get(article.ImageId.Value);
+                    mappedArticle.Image = image.ImageFile;
+                }
+
+                IEnumerable<Comment> comments = unitOfWork.CommentRepository.GetCommentsForArticle(articleId);
+                List<CommentDto> mappedComments = objectMapper.Map<IEnumerable<Comment>, List<CommentDto>>(comments);
+                mappedArticle.Comments = mappedComments;
+
                 unitOfWork.Commit();
-                return objectMapper.Map<Article, ArticleDto>(article);
+                return mappedArticle;
             }
         }
 
         public ArticlePreviewDto[] GetArticlePreviews()
         {
-            throw new NotImplementedException();
+            using (var unitOfWork = unitOfWorkFactory.Create())
+            {
+                IEnumerable<Article> articles = unitOfWork.ArticleRepository.GetEntities();
+                unitOfWork.Commit();
+                return objectMapper.Map<IEnumerable<Article>, ArticlePreviewDto[]>(articles);
+            }
         }
     }
 }

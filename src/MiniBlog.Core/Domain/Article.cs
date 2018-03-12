@@ -9,11 +9,6 @@ namespace MiniBlog.Core.Domain
     public class Article : IEntity<int>
     {
         /// <summary>
-        /// List of comments.
-        /// </summary>
-        public List<Comment> Comments { get; set; }
-
-        /// <summary>
         /// Article content.
         /// </summary>
         public string Content { get; set; }
@@ -31,6 +26,6 @@ namespace MiniBlog.Core.Domain
         /// <summary>
         /// Image.
         /// </summary>
-        public Image Image { get; set; }
+        public int? ImageId { get; set; }
     }
 }
