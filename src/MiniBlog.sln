@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		database\deploy.sql = database\deploy.sql
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniBlog.DataContract", "MiniBlog.DataContract\MiniBlog.DataContract.csproj", "{472CE167-0348-49B2-96DD-94805D54A2C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniBlog.Contract", "MiniBlog.Contract\MiniBlog.Contract.csproj", "{472CE167-0348-49B2-96DD-94805D54A2C2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniBlog.ServiceClient", "MiniBlog.ServiceClient\MiniBlog.ServiceClient.csproj", "{47EED674-DED4-4D36-8C9E-1696836C137A}"
 	ProjectSection(ProjectDependencies) = postProject

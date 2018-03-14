@@ -147,9 +147,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MiniBlog.DataContract\MiniBlog.DataContract.csproj">
+    <ProjectReference Include="..\MiniBlog.Contract\MiniBlog.Contract.csproj">
       <Project>{472ce167-0348-49b2-96dd-94805d54a2c2}</Project>
-      <Name>MiniBlog.DataContract</Name>
+      <Name>MiniBlog.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\MiniBlog.UI.Core\MiniBlog.UI.Core.csproj">
       <Project>{57d74160-99bb-4dfc-9a2e-8aa2890e3654}</Project>

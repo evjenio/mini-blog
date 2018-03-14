@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.Threading.Tasks;
-using MiniBlog.DataContract;
+using MiniBlog.Contract;
 using MvvmCross.Core.ViewModels;
 using Serilog;
 using IBlogService = MiniBlog.ServiceClient.Integration.IBlogService;

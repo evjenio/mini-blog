@@ -64,8 +64,8 @@
     <None Include="Connected Services\Integration\BlogService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Properties\DataSources\MiniBlog.DataContract.ArticleDto.datasource" />
-    <None Include="Properties\DataSources\MiniBlog.DataContract.ArticlePreviewDto.datasource" />
+    <None Include="Properties\DataSources\MiniBlog.Contract.ArticleDto.datasource" />
+    <None Include="Properties\DataSources\MiniBlog.Contract.ArticlePreviewDto.datasource" />
     <None Include="Properties\DataSources\MiniBlog.Model.Article.datasource" />
     <None Include="Properties\DataSources\MiniBlog.Model.ArticlePreview.datasource" />
   </ItemGroup>
@@ -85,9 +85,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MiniBlog.DataContract\MiniBlog.DataContract.csproj">
+    <ProjectReference Include="..\MiniBlog.Contract\MiniBlog.Contract.csproj">
       <Project>{472ce167-0348-49b2-96dd-94805d54a2c2}</Project>
-      <Name>MiniBlog.DataContract</Name>
+      <Name>MiniBlog.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

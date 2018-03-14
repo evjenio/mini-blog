@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using MiniBlog.Contract;
+
 namespace MiniBlog.ServiceClient.Integration {
     
     
@@ -16,39 +18,39 @@ namespace MiniBlog.ServiceClient.Integration {
     public interface IBlogService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/AddArticle", ReplyAction="http://tempuri.org/IBlogService/AddArticleResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MiniBlog.DataContract.ServiceFaultMessage), Action="http://tempuri.org/IBlogService/AddArticleServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract")]
-        void AddArticle(MiniBlog.DataContract.ArticleDto article);
+        [System.ServiceModel.FaultContractAttribute(typeof(ServiceFaultMessage), Action="http://tempuri.org/IBlogService/AddArticleServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract")]
+        void AddArticle(ArticleDto article);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/AddArticle", ReplyAction="http://tempuri.org/IBlogService/AddArticleResponse")]
-        System.Threading.Tasks.Task AddArticleAsync(MiniBlog.DataContract.ArticleDto article);
+        System.Threading.Tasks.Task AddArticleAsync(ArticleDto article);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/AddComment", ReplyAction="http://tempuri.org/IBlogService/AddCommentResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MiniBlog.DataContract.ServiceFaultMessage), Action="http://tempuri.org/IBlogService/AddCommentServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ServiceFaultMessage), Action="http://tempuri.org/IBlogService/AddCommentServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract")]
         void AddComment(int articleId, string commentText, string userName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/AddComment", ReplyAction="http://tempuri.org/IBlogService/AddCommentResponse")]
         System.Threading.Tasks.Task AddCommentAsync(int articleId, string commentText, string userName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/DeleteArticle", ReplyAction="http://tempuri.org/IBlogService/DeleteArticleResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MiniBlog.DataContract.ServiceFaultMessage), Action="http://tempuri.org/IBlogService/DeleteArticleServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ServiceFaultMessage), Action="http://tempuri.org/IBlogService/DeleteArticleServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract")]
         void DeleteArticle(int articleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/DeleteArticle", ReplyAction="http://tempuri.org/IBlogService/DeleteArticleResponse")]
         System.Threading.Tasks.Task DeleteArticleAsync(int articleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/GetArticle", ReplyAction="http://tempuri.org/IBlogService/GetArticleResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MiniBlog.DataContract.ServiceFaultMessage), Action="http://tempuri.org/IBlogService/GetArticleServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract")]
-        MiniBlog.DataContract.ArticleDto GetArticle(int articleId);
+        [System.ServiceModel.FaultContractAttribute(typeof(ServiceFaultMessage), Action="http://tempuri.org/IBlogService/GetArticleServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract")]
+        ArticleDto GetArticle(int articleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/GetArticle", ReplyAction="http://tempuri.org/IBlogService/GetArticleResponse")]
-        System.Threading.Tasks.Task<MiniBlog.DataContract.ArticleDto> GetArticleAsync(int articleId);
+        System.Threading.Tasks.Task<ArticleDto> GetArticleAsync(int articleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/GetArticlePreviews", ReplyAction="http://tempuri.org/IBlogService/GetArticlePreviewsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(MiniBlog.DataContract.ServiceFaultMessage), Action="http://tempuri.org/IBlogService/GetArticlePreviewsServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract")]
-        MiniBlog.DataContract.ArticlePreviewDto[] GetArticlePreviews();
+        [System.ServiceModel.FaultContractAttribute(typeof(ServiceFaultMessage), Action="http://tempuri.org/IBlogService/GetArticlePreviewsServiceFaultMessageFault", Name="ServiceFaultMessage", Namespace="http://schemas.datacontract.org/2004/07/MiniBlog.DataContract")]
+        ArticlePreviewDto[] GetArticlePreviews();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/GetArticlePreviews", ReplyAction="http://tempuri.org/IBlogService/GetArticlePreviewsResponse")]
-        System.Threading.Tasks.Task<MiniBlog.DataContract.ArticlePreviewDto[]> GetArticlePreviewsAsync();
+        System.Threading.Tasks.Task<ArticlePreviewDto[]> GetArticlePreviewsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -78,11 +80,11 @@ namespace MiniBlog.ServiceClient.Integration {
                 base(binding, remoteAddress) {
         }
         
-        public void AddArticle(MiniBlog.DataContract.ArticleDto article) {
+        public void AddArticle(ArticleDto article) {
             base.Channel.AddArticle(article);
         }
         
-        public System.Threading.Tasks.Task AddArticleAsync(MiniBlog.DataContract.ArticleDto article) {
+        public System.Threading.Tasks.Task AddArticleAsync(ArticleDto article) {
             return base.Channel.AddArticleAsync(article);
         }
         
@@ -102,19 +104,19 @@ namespace MiniBlog.ServiceClient.Integration {
             return base.Channel.DeleteArticleAsync(articleId);
         }
         
-        public MiniBlog.DataContract.ArticleDto GetArticle(int articleId) {
+        public ArticleDto GetArticle(int articleId) {
             return base.Channel.GetArticle(articleId);
         }
         
-        public System.Threading.Tasks.Task<MiniBlog.DataContract.ArticleDto> GetArticleAsync(int articleId) {
+        public System.Threading.Tasks.Task<ArticleDto> GetArticleAsync(int articleId) {
             return base.Channel.GetArticleAsync(articleId);
         }
         
-        public MiniBlog.DataContract.ArticlePreviewDto[] GetArticlePreviews() {
+        public ArticlePreviewDto[] GetArticlePreviews() {
             return base.Channel.GetArticlePreviews();
         }
         
-        public System.Threading.Tasks.Task<MiniBlog.DataContract.ArticlePreviewDto[]> GetArticlePreviewsAsync() {
+        public System.Threading.Tasks.Task<ArticlePreviewDto[]> GetArticlePreviewsAsync() {
             return base.Channel.GetArticlePreviewsAsync();
         }
     }

@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MiniBlog.DataContract\MiniBlog.DataContract.csproj" />
+    <ProjectReference Include="..\MiniBlog.Contract\MiniBlog.Contract.csproj" />
     <ProjectReference Include="..\MiniBlog.ServiceClient\MiniBlog.ServiceClient.csproj" />
   </ItemGroup>
 

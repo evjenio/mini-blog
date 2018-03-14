@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ServiceModel;
 
-namespace MiniBlog.DataContract
+namespace MiniBlog.Contract
 {
     /// <summary>
     /// Blog WCF service contract.

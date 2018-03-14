@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using MiniBlog.Contract;
 using MiniBlog.Core;
-using MiniBlog.DataContract;
 using MiniBlog.WCF.ErrorHandling;
 
 namespace MiniBlog.WCF.Services
@@ -28,7 +28,11 @@ namespace MiniBlog.WCF.Services
         /// <param name="article">article</param>
         public void AddArticle(ArticleDto article)
         {
-            Contract.Requires(article != null);
+            if (article == null)
+            {
+                throw new ArgumentNullException(nameof(article));
+            }
+
             blog.AddArticle(article);
         }
 

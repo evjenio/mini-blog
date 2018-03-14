@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace MiniBlog.DataContract
+namespace MiniBlog.Contract
 {
     /// <summary>
     /// Serializable fault object.

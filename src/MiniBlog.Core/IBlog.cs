@@ -1,4 +1,4 @@
-﻿using MiniBlog.DataContract;
+﻿using MiniBlog.Contract;
 
 namespace MiniBlog.Core
 {

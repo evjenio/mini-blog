@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+using MiniBlog.Contract;
 using MiniBlog.Core.DataAccess;
 using MiniBlog.Core.Domain;
 using MiniBlog.Core.Mappers;
-using MiniBlog.DataContract;
 using Nelibur.Sword.Extensions;
 using Serilog;
 
@@ -25,7 +24,11 @@ namespace MiniBlog.Core
 
         public void AddArticle(ArticleDto article)
         {
-            Contract.Requires(article != null);
+            if (article == null)
+            {
+                throw new ArgumentNullException(nameof(article));
+            }
+
             logger.Verbose("Adding article with header: {@header}", article.Header);
             var mappedArticle = objectMapper.Map<ArticleDto, Article>(article);
 
@@ -46,7 +49,11 @@ namespace MiniBlog.Core
 
         public void AddComment(CommentDto comment)
         {
-            Contract.Requires(comment != null);
+            if (comment == null)
+            {
+                throw new ArgumentNullException(nameof(comment));
+            }
+
             logger.Verbose("Adding comment \"{@comment}\" from {@userName} to article {@articleId}",
                 comment.CommentText, comment.UserName, comment.ArticleId);
 

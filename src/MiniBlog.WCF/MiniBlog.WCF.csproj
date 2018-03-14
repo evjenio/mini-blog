@@ -109,9 +109,9 @@
       <Project>{a5e53d2b-1f64-461e-bc40-95fcd231b12f}</Project>
       <Name>MiniBlog.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MiniBlog.DataContract\MiniBlog.DataContract.csproj">
+    <ProjectReference Include="..\MiniBlog.Contract\MiniBlog.Contract.csproj">
       <Project>{472ce167-0348-49b2-96dd-94805d54a2c2}</Project>
-      <Name>MiniBlog.DataContract</Name>
+      <Name>MiniBlog.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

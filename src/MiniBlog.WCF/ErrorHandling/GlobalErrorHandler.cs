@@ -2,7 +2,7 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
-using MiniBlog.DataContract;
+using MiniBlog.Contract;
 using Serilog;
 
 namespace MiniBlog.WCF.ErrorHandling
