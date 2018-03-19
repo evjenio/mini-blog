@@ -4,7 +4,11 @@
                    namespace="MiniBlog.Core.Domain">
 
   <class name="Comment" table="comments">
-    <id name="Id"/>
+    <id name="Id">
+      <generator class="sequence">
+        <param name="sequence">comments_id_seq</param>
+      </generator>
+    </id>
     <property name="CommentText" />
     <property name="ArticleId" />
     <property name="UserName" />

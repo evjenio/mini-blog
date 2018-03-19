@@ -23,7 +23,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniBlog.ServiceClient", "M
 		{74711E31-2737-4DFB-9C9D-DD45D9131D24} = {74711E31-2737-4DFB-9C9D-DD45D9131D24}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniBlog.UI.Core", "MiniBlog.UI.Core\MiniBlog.UI.Core.csproj", "{57D74160-99BB-4DFC-9A2E-8AA2890E3654}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniBlog.UI.Core", "MiniBlog.UI.Core\MiniBlog.UI.Core.csproj", "{57D74160-99BB-4DFC-9A2E-8AA2890E3654}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniBlog.Client.PowerShell", "MiniBlog.Client.PowerShell\MiniBlog.Client.PowerShell.csproj", "{EED7D679-A25E-40F7-829F-CAAA3ECF9E42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{57D74160-99BB-4DFC-9A2E-8AA2890E3654}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57D74160-99BB-4DFC-9A2E-8AA2890E3654}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57D74160-99BB-4DFC-9A2E-8AA2890E3654}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EED7D679-A25E-40F7-829F-CAAA3ECF9E42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EED7D679-A25E-40F7-829F-CAAA3ECF9E42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EED7D679-A25E-40F7-829F-CAAA3ECF9E42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EED7D679-A25E-40F7-829F-CAAA3ECF9E42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

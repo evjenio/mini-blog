@@ -4,7 +4,11 @@
                    namespace="MiniBlog.Core.Domain">
 
   <class name="Article" table="articles">
-    <id name="Id"/>
+    <id name="Id">
+      <generator class="sequence">
+        <param name="sequence">articles_id_seq</param>
+      </generator>
+    </id>
     <property name="Content" />
     <property name="Header" />
     <property name="ImageId" />
