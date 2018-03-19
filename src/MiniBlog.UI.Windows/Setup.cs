@@ -1,9 +1,10 @@
-﻿using System.Windows.Threading;
+﻿using System;
+using System.Windows.Threading;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Wpf.Platform;
 using MvvmCross.Wpf.Views.Presenters;
 
-namespace MiniBlog.UI.WPF
+namespace MiniBlog.UI.Windows
 {
     /// <summary>
     /// App Setup logic.

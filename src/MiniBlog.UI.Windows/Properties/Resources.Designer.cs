@@ -8,7 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MiniBlog.UI.WPF.Properties
+using System;
+
+namespace MiniBlog.UI.Windows.Properties
 {
 
 

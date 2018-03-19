@@ -1,6 +1,7 @@
-﻿using MvvmCross.Wpf.Views;
+﻿using System;
+using MvvmCross.Wpf.Views;
 
-namespace MiniBlog.UI.WPF.Views
+namespace MiniBlog.UI.Windows.Views
 {
     /// <summary>
     /// Interaction logic for BlogView.xaml

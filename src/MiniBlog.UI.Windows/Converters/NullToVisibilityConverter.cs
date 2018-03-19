@@ -3,17 +3,17 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace MiniBlog.UI.WPF.Converters
+namespace MiniBlog.UI.Windows.Converters
 {
     /// <summary>
-    /// Converts Int To Visibility
+    /// Converts null To Visibility
     /// </summary>
-    public class IntToVisibilityConverter : IValueConverter
+    public class NullToVisibilityConverter : IValueConverter
     {
         /// <inheritdoc />
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (int)value != 0 ? Visibility.Visible : Visibility.Collapsed;
+            return value == null ? Visibility.Collapsed : Visibility.Visible;
         }
 
         /// <inheritdoc />

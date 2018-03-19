@@ -81,12 +81,14 @@ namespace MiniBlog.Core
             using (var unitOfWork = unitOfWorkFactory.Create())
             {
                 var article = unitOfWork.ArticleRepository.Get(articleId);
+                if (article == null) return null;
+
                 var mappedArticle = objectMapper.Map<Article, ArticleDto>(article);
 
                 if (article.ImageId.HasValue)
                 {
                     var image = unitOfWork.ImageRepository.Get(article.ImageId.Value);
-                    mappedArticle.Image = image.ImageFile;
+                    mappedArticle.Image = image?.ImageFile;
                 }
 
                 IEnumerable<Comment> comments = unitOfWork.CommentRepository.GetCommentsForArticle(articleId);

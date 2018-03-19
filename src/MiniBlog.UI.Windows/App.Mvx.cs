@@ -4,7 +4,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using MvvmCross.Wpf.Views.Presenters;
 
-namespace MiniBlog.UI.WPF
+namespace MiniBlog.UI.Windows
 {
     /// <summary>
     /// App initialization logic
