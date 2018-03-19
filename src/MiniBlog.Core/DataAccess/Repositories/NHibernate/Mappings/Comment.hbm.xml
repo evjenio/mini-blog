@@ -3,7 +3,7 @@
                    assembly="MiniBlog.Core"
                    namespace="MiniBlog.Core.Domain">
 
-  <class name="Comment">
+  <class name="Comment" table="comments">
     <id name="Id"/>
     <property name="CommentText" />
     <property name="ArticleId" />

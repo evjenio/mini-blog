@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MiniBlog.Contract;
-using MiniBlog.Core.DataAccess;
+using MiniBlog.Core.DataAccess.UoW;
 using MiniBlog.Core.Domain;
 using MiniBlog.Core.Mappers;
 using Nelibur.Sword.Extensions;

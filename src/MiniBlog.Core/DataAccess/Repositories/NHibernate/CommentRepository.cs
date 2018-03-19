@@ -7,28 +7,28 @@ using NHibernate;
 namespace MiniBlog.Core.DataAccess.Repositories.NHibernate
 {
     /// <summary>
-    /// Image repository
+    /// Comment Repository
     /// </summary>
-    public class ImageRepository : Repository, IImageRepository
+    public class CommentRepository : Repository, ICommentRepository
     {
         /// <summary>
         /// C-tor
         /// </summary>
         /// <param name="session">Session</param>
-        public ImageRepository(ISession session)
+        public CommentRepository(ISession session)
             : base(session)
         {
         }
 
         /// <inheritdoc/>
-        public int Add(Image entity)
+        public int Add(Comment entity)
         {
             Session.Save(entity);
             return entity.Id;
         }
 
         /// <inheritdoc/>
-        public void Delete(Image entity)
+        public void Delete(Comment entity)
         {
             Session.Delete(entity);
         }
@@ -36,23 +36,32 @@ namespace MiniBlog.Core.DataAccess.Repositories.NHibernate
         /// <inheritdoc/>
         public void Delete(int id)
         {
-            Session.Delete(new Image() { Id = id });
+            Session.Delete(new Comment() { Id = id });
         }
 
         /// <inheritdoc/>
-        public Image Get(int id)
+        public Comment Get(int id)
         {
-            return Session.Get<Image>(id);
+            return Session.Get<Comment>(id);
         }
 
         /// <inheritdoc/>
-        public IEnumerable<Image> GetEntities()
+        public IEnumerable<Comment> GetCommentsForArticle(int articleId)
         {
-            return Session.Query<Image>().ToList();
+            return Session.QueryOver<Comment>()
+                .Where(c => c.ArticleId == articleId)
+                .OrderBy(i => i.Id).Asc
+                .List();
         }
 
         /// <inheritdoc/>
-        public void Update(Image entity)
+        public IEnumerable<Comment> GetEntities()
+        {
+            return Session.Query<Comment>().ToList();
+        }
+
+        /// <inheritdoc/>
+        public void Update(Comment entity)
         {
             Session.Update(entity);
         }

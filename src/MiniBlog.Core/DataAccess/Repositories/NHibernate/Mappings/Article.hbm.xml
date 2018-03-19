@@ -3,7 +3,7 @@
                    assembly="MiniBlog.Core"
                    namespace="MiniBlog.Core.Domain">
 
-  <class name="Article">
+  <class name="Article" table="articles">
     <id name="Id"/>
     <property name="Content" />
     <property name="Header" />
