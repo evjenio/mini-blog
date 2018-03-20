@@ -6,7 +6,7 @@ namespace MiniBlog.Core.Domain
     /// Image.
     /// </summary>
     // ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
-    public class Image : IEntity<int>
+    public class Image : IEntity
     {
         /// <summary>
         /// Identity.
@@ -17,5 +17,10 @@ namespace MiniBlog.Core.Domain
         /// Image.
         /// </summary>
         public virtual byte[] ImageFile { get; set; }
+
+        /// <summary>
+        /// Article.
+        /// </summary>
+        public virtual Article Article { get; set; }
     }
 }

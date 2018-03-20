@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MiniBlog.Core.Domain;
 
 namespace MiniBlog.Core.DataAccess.Repositories
@@ -9,7 +10,7 @@ namespace MiniBlog.Core.DataAccess.Repositories
     /// </summary>
     /// <typeparam name="TEntity">Entity type</typeparam>
     /// <typeparam name="TIdentity">Identity type</typeparam>
-    public interface IRepository<TEntity, TIdentity>
+    public interface IRepository<TEntity, in TIdentity>
         where TIdentity : struct
         where TEntity : IEntity<TIdentity>
     {
@@ -17,19 +18,13 @@ namespace MiniBlog.Core.DataAccess.Repositories
         /// Adds entity.
         /// </summary>
         /// <param name="entity">Entity</param>
-        TIdentity Add(TEntity entity);
+        void Add(TEntity entity);
 
         /// <summary>
         /// Removes entity.
         /// </summary>
         /// <param name="entity">Entity</param>
         void Delete(TEntity entity);
-
-        /// <summary>
-        /// Removes entity.
-        /// </summary>
-        /// <param name="id">Entity identity</param>
-        void Delete(TIdentity id);
 
         /// <summary>
         /// Gets entity.
@@ -42,12 +37,17 @@ namespace MiniBlog.Core.DataAccess.Repositories
         /// Gets all entities.
         /// </summary>
         /// <returns>List of entities</returns>
-        IEnumerable<TEntity> GetEntities();
+        IQueryable<TEntity> GetEntities();
 
         /// <summary>
         /// Updates entity.
         /// </summary>
         /// <param name="entity">Entity</param>
         void Update(TEntity entity);
+    }
+
+    public interface IRepository<TEntity> : IRepository<TEntity, int>
+        where TEntity : IEntity
+    {
     }
 }

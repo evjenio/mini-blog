@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Dapper;
 using MiniBlog.Core.Domain;
 
@@ -9,7 +10,7 @@ namespace MiniBlog.Core.DataAccess.Repositories.Dapper
     /// <summary>
     /// Article Repository
     /// </summary>
-    public class ArticleRepository : Repository, IArticleRepository
+    public class ArticleRepository : Repository, IRepository<Article>
     {
         /// <summary>
         /// C-tor
@@ -21,15 +22,14 @@ namespace MiniBlog.Core.DataAccess.Repositories.Dapper
         }
 
         /// <inheritdoc/>
-        public int Add(Article entity)
+        public void Add(Article entity)
         {
             const string sql = @"INSERT INTO public.articles (header, content, imageid) 
                                             VALUES (@header, @content, @imageid) 
                                             RETURNING id";
-            var parameters = new { header = entity.Header, content = entity.Content, imageid = entity.ImageId };
+            var parameters = new { header = entity.Header, content = entity.Content, imageid = entity.Image?.Id };
             var id = Connection.QueryFirst<int>(sql, parameters, Transaction);
             entity.Id = id;
-            return id;
         }
 
         /// <inheritdoc/>
@@ -39,21 +39,15 @@ namespace MiniBlog.Core.DataAccess.Repositories.Dapper
         }
 
         /// <inheritdoc/>
-        public void Delete(int id)
-        {
-            Connection.Execute("DELETE FROM public.articles a WHERE a.id = @id", new { id }, Transaction);
-        }
-
-        /// <inheritdoc/>
         public Article Get(int id)
         {
             return Connection.QuerySingleOrDefault<Article>("SELECT * FROM public.articles WHERE id = @id", new { id }, Transaction);
         }
 
         /// <inheritdoc/>
-        public IEnumerable<Article> GetEntities()
+        public IQueryable<Article> GetEntities()
         {
-            return Connection.Query<Article>("SELECT id, header FROM public.articles ORDER BY id ASC");
+            return Connection.Query<Article>("SELECT id, header FROM public.articles ORDER BY id ASC").AsQueryable();
         }
 
         /// <inheritdoc/>

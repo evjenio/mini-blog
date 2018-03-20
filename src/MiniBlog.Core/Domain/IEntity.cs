@@ -11,4 +11,8 @@
         /// </summary>
         TIdentity Id { get; set; }
     }
+
+    public interface IEntity : IEntity<int>
+    {
+    }
 }

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MiniBlog.Contract;
 using MiniBlog.Core.DataAccess.UoW;
 using MiniBlog.Core.Domain;
 using MiniBlog.Core.Mappers;
 using Nelibur.Sword.Extensions;
+using NHibernate.Linq;
 using Serilog;
 
 namespace MiniBlog.Core
@@ -29,20 +31,15 @@ namespace MiniBlog.Core
                 throw new ArgumentNullException(nameof(article));
             }
 
-            logger.Verbose("Adding article with header: {@header}", article.Header);
+            logger.Verbose("Adding article: {@article}", article);
             var mappedArticle = objectMapper.Map<ArticleDto, Article>(article);
 
             using (var unitOfWork = unitOfWorkFactory.Create())
             {
                 article.Image.ToOption()
-                    .Do(file =>
-                    {
-                        var img = new Image() { ImageFile = file };
-                        unitOfWork.ImageRepository.Add(img);
-                        mappedArticle.ImageId = img.Id;
-                    });
+                    .Do(file => mappedArticle.Image = new Image() { ImageFile = file });
 
-                unitOfWork.ArticleRepository.Add(mappedArticle);
+                unitOfWork.RepositoryFor<Article>().Add(mappedArticle);
                 unitOfWork.Commit();
             }
         }
@@ -54,24 +51,26 @@ namespace MiniBlog.Core
                 throw new ArgumentNullException(nameof(comment));
             }
 
-            logger.Verbose("Adding comment \"{@comment}\" from {@userName} to article {@articleId}",
-                comment.CommentText, comment.UserName, comment.ArticleId);
+            logger.Verbose("Adding comment {@comment}", comment);
 
             var mappedComment = objectMapper.Map<CommentDto, Comment>(comment);
 
             using (var unitOfWork = unitOfWorkFactory.Create())
             {
-                unitOfWork.CommentRepository.Add(mappedComment);
+                var article = unitOfWork.RepositoryFor<Article>().Get(comment.ArticleId);
+                article.Comments.Add(mappedComment);
+                unitOfWork.RepositoryFor<Article>().Update(article);
                 unitOfWork.Commit();
             }
         }
 
         public void DeleteArticle(int articleId)
         {
-            logger.Verbose("Deleting article {@articleId}", articleId);
+            logger.Verbose("Deleting article {articleId}", articleId);
             using (var unitOfWork = unitOfWorkFactory.Create())
             {
-                unitOfWork.ArticleRepository.Delete(articleId);
+                var article = unitOfWork.RepositoryFor<Article>().Get(articleId);
+                unitOfWork.RepositoryFor<Article>().Delete(article);
                 unitOfWork.Commit();
             }
         }
@@ -80,22 +79,13 @@ namespace MiniBlog.Core
         {
             using (var unitOfWork = unitOfWorkFactory.Create())
             {
-                var article = unitOfWork.ArticleRepository.Get(articleId);
-                if (article == null) return null;
-
-                var mappedArticle = objectMapper.Map<Article, ArticleDto>(article);
-
-                if (article.ImageId.HasValue)
-                {
-                    var image = unitOfWork.ImageRepository.Get(article.ImageId.Value);
-                    mappedArticle.Image = image?.ImageFile;
-                }
-
-                IEnumerable<Comment> comments = unitOfWork.CommentRepository.GetCommentsForArticle(articleId);
-                List<CommentDto> mappedComments = objectMapper.Map<IEnumerable<Comment>, List<CommentDto>>(comments);
-                mappedArticle.Comments = mappedComments;
+                var article = unitOfWork.RepositoryFor<Article>()
+                    .GetEntities()
+                    .Fetch(x => x.Comments)
+                    .FirstOrDefault(a => a.Id == articleId);
 
                 unitOfWork.Commit();
+                var mappedArticle = objectMapper.Map<Article, ArticleDto>(article);
                 return mappedArticle;
             }
         }
@@ -104,7 +94,8 @@ namespace MiniBlog.Core
         {
             using (var unitOfWork = unitOfWorkFactory.Create())
             {
-                IEnumerable<Article> articles = unitOfWork.ArticleRepository.GetEntities();
+                IEnumerable<Article> articles = unitOfWork.RepositoryFor<Article>()
+                    .GetEntities().ToList();
                 unitOfWork.Commit();
                 return objectMapper.Map<IEnumerable<Article>, ArticlePreviewDto[]>(articles);
             }

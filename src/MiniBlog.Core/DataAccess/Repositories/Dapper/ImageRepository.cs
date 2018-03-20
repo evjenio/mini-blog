@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Dapper;
 using MiniBlog.Core.Domain;
 
@@ -9,7 +10,7 @@ namespace MiniBlog.Core.DataAccess.Repositories.Dapper
     /// <summary>
     /// Image Repository
     /// </summary>
-    public class ImageRepository : Repository, IImageRepository
+    public class ImageRepository : Repository, IRepository<Image>
     {
         /// <summary>
         /// C-tor
@@ -21,12 +22,11 @@ namespace MiniBlog.Core.DataAccess.Repositories.Dapper
         }
 
         /// <inheritdoc/>
-        public int Add(Image entity)
+        public void Add(Image entity)
         {
             var sql = "INSERT INTO public.images (imagefile) VALUES (@imagefile) RETURNING id";
             var id = Connection.QueryFirst<int>(sql, new { imagefile = entity.ImageFile }, Transaction);
             entity.Id = id;
-            return id;
         }
 
         /// <inheritdoc/>
@@ -36,21 +36,15 @@ namespace MiniBlog.Core.DataAccess.Repositories.Dapper
         }
 
         /// <inheritdoc/>
-        public void Delete(int id)
-        {
-            Connection.Execute("DELETE FROM public.images WHERE id = @id", new { id }, Transaction);
-        }
-
-        /// <inheritdoc/>
         public Image Get(int id)
         {
             return Connection.QuerySingleOrDefault<Image>("SELECT * FROM public.images WHERE id = @id", new { id }, Transaction);
         }
 
         /// <inheritdoc/>
-        public IEnumerable<Image> GetEntities()
+        public IQueryable<Image> GetEntities()
         {
-            return Connection.Query<Image>("SELECT * FROM public.images ORDER BY id ASC", Transaction);
+            return Connection.Query<Image>("SELECT * FROM public.images ORDER BY id ASC", Transaction).AsQueryable();
         }
 
         /// <inheritdoc/>

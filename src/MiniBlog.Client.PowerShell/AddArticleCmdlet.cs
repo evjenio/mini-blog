@@ -8,8 +8,6 @@ namespace MiniBlog.Client.PowerShell
     [Cmdlet(VerbsCommon.Add, "Article")]
     public class AddArticleCmdlet : BlogCmdletBase
     {
-        private BlogServiceClient client;
-
         [Parameter(Position = 1, Mandatory = true)]
         [Alias("c")]
         public string Content { get; set; }
@@ -20,7 +18,7 @@ namespace MiniBlog.Client.PowerShell
 
         protected override void ProcessRecord()
         {
-            client.AddArticle(new ArticleDto()
+            Client.AddArticle(new ArticleDto()
             {
                 Header = Header,
                 Content = Content,

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Dapper;
 using MiniBlog.Core.Domain;
 
@@ -9,7 +10,7 @@ namespace MiniBlog.Core.DataAccess.Repositories.Dapper
     /// <summary>
     /// Comment repository
     /// </summary>
-    public class CommentRepository : Repository, ICommentRepository
+    public class CommentRepository : Repository, IRepository<Comment>
     {
         /// <summary>
         /// C-tor
@@ -21,7 +22,7 @@ namespace MiniBlog.Core.DataAccess.Repositories.Dapper
         }
 
         /// <inheritdoc/>
-        public int Add(Comment entity)
+        public void Add(Comment entity)
         {
             const string sql =
                 @"INSERT INTO public.comments (commenttext, username, articleid) 
@@ -30,26 +31,19 @@ namespace MiniBlog.Core.DataAccess.Repositories.Dapper
 
             var parameters = new
             {
-                articleId = entity.ArticleId,
+                articleId = entity.Article.Id,
                 commenttext = entity.CommentText,
                 username = entity.UserName
             };
 
             var id = Connection.QueryFirst<int>(sql, parameters, Transaction);
             entity.Id = id;
-            return id;
         }
 
         /// <inheritdoc/>
         public void Delete(Comment entity)
         {
             Connection.Execute("DELETE FROM public.comments WHERE id = @id", new { id = entity.Id }, Transaction);
-        }
-
-        /// <inheritdoc/>
-        public void Delete(int id)
-        {
-            Connection.Execute("DELETE FROM public.comments WHERE id = @id", new { id }, Transaction);
         }
 
         /// <inheritdoc/>
@@ -67,9 +61,9 @@ namespace MiniBlog.Core.DataAccess.Repositories.Dapper
         }
 
         /// <inheritdoc/>
-        public IEnumerable<Comment> GetEntities()
+        public IQueryable<Comment> GetEntities()
         {
-            return Connection.Query<Comment>("SELECT * FROM public.comments ORDER BY id ASC", Transaction);
+            return Connection.Query<Comment>("SELECT * FROM public.comments ORDER BY id ASC", Transaction).AsQueryable();
         }
 
         /// <inheritdoc/>

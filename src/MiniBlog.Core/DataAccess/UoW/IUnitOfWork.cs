@@ -1,5 +1,6 @@
 ﻿using System;
 using MiniBlog.Core.DataAccess.Repositories;
+using MiniBlog.Core.Domain;
 
 namespace MiniBlog.Core.DataAccess.UoW
 {
@@ -9,20 +10,7 @@ namespace MiniBlog.Core.DataAccess.UoW
     /// </summary>
     public interface IUnitOfWork : IDisposable
     {
-        /// <summary>
-        /// Article Repository
-        /// </summary>
-        IArticleRepository ArticleRepository { get; }
-
-        /// <summary>
-        /// Comment Repository
-        /// </summary>
-        ICommentRepository CommentRepository { get; }
-
-        /// <summary>
-        /// Image Repository
-        /// </summary>
-        IImageRepository ImageRepository { get; }
+        IRepository<TEntity> RepositoryFor<TEntity>() where TEntity : IEntity;
 
         /// <summary>
         /// Commit changes

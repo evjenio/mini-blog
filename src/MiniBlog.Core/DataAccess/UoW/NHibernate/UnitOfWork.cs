@@ -1,7 +1,6 @@
 ﻿using System;
-using MiniBlog.Core.DataAccess.Infrastructure.NHibernate;
 using MiniBlog.Core.DataAccess.Repositories;
-using MiniBlog.Core.DataAccess.Repositories.NHibernate;
+using MiniBlog.Core.Domain;
 using NHibernate;
 
 namespace MiniBlog.Core.DataAccess.UoW.NHibernate
@@ -12,37 +11,24 @@ namespace MiniBlog.Core.DataAccess.UoW.NHibernate
     /// </summary>
     public sealed class UnitOfWork : IUnitOfWork
     {
-        private static readonly SessionFactory sessionFactory = new SessionFactory();
-        private readonly ISession session;
+        private readonly IRepositoryResolver repositoryResolver;
         private readonly ITransaction transaction;
-
-        private IArticleRepository articleRepository;
-        private ICommentRepository commentRepository;
         private bool disposed;
-        private IImageRepository imageRepository;
 
         /// <summary>
         /// C-tor
         /// </summary>
-        public UnitOfWork()
+        public UnitOfWork(ISession session, IRepositoryResolver repositoryResolver)
         {
-            session = sessionFactory.Instance.OpenSession();
+            this.repositoryResolver = repositoryResolver;
             transaction = session.BeginTransaction();
         }
 
-        ~UnitOfWork()
+        public IRepository<TEntity> RepositoryFor<TEntity>()
+            where TEntity : IEntity
         {
-            Dispose(false);
+            return repositoryResolver.ResolveFor<TEntity>();
         }
-
-        /// <inheritdoc/>
-        public IArticleRepository ArticleRepository => articleRepository ?? (articleRepository = new ArticleRepository(session));
-
-        /// <inheritdoc/>
-        public ICommentRepository CommentRepository => commentRepository ?? (commentRepository = new CommentRepository(session));
-
-        /// <inheritdoc/>
-        public IImageRepository ImageRepository => imageRepository ?? (imageRepository = new ImageRepository(session));
 
         /// <inheritdoc/>
         public void Commit()
@@ -72,20 +58,9 @@ namespace MiniBlog.Core.DataAccess.UoW.NHibernate
         /// <inheritdoc/>
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        private void Dispose(bool disposing)
-        {
             if (!disposed)
             {
-                if (disposing)
-                {
-                    transaction?.Dispose();
-                    session?.Dispose();
-                }
-
+                transaction?.Dispose();
                 disposed = true;
             }
         }

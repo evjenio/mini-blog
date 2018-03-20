@@ -6,7 +6,7 @@ namespace MiniBlog.Core.Domain
     /// Comment.
     /// </summary>
     // ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
-    public class Comment : IEntity<int>
+    public class Comment : IEntity
     {
         /// <summary>
         /// Identity.
@@ -23,8 +23,8 @@ namespace MiniBlog.Core.Domain
         public virtual string UserName { get; set; }
 
         /// <summary>
-        /// Article Identity.
+        /// Article.
         /// </summary>
-        public virtual int ArticleId { get; set; }
+        public virtual Article Article { get; set; }
     }
 }

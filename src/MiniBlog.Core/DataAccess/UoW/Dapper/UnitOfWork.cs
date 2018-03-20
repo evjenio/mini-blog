@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using MiniBlog.Core.DataAccess.Repositories;
-using MiniBlog.Core.DataAccess.Repositories.Dapper;
+using MiniBlog.Core.Domain;
 
 namespace MiniBlog.Core.DataAccess.UoW.Dapper
 {
@@ -13,10 +13,7 @@ namespace MiniBlog.Core.DataAccess.UoW.Dapper
     {
         private readonly IDbConnection connection;
         private readonly IDbTransaction transaction;
-        private IArticleRepository articleRepository;
-        private ICommentRepository commentRepository;
         private bool disposed;
-        private IImageRepository imageRepository;
 
         /// <summary>
         /// C-tor
@@ -28,19 +25,11 @@ namespace MiniBlog.Core.DataAccess.UoW.Dapper
             transaction = connection.BeginTransaction();
         }
 
-        ~UnitOfWork()
+        public IRepository<TEntity> RepositoryFor<TEntity>()
+            where TEntity : IEntity
         {
-            Dispose(false);
+            throw new NotImplementedException();
         }
-
-        /// <inheritdoc/>
-        public IArticleRepository ArticleRepository => articleRepository ?? (articleRepository = new ArticleRepository(transaction));
-
-        /// <inheritdoc/>
-        public ICommentRepository CommentRepository => commentRepository ?? (commentRepository = new CommentRepository(transaction));
-
-        /// <inheritdoc/>
-        public IImageRepository ImageRepository => imageRepository ?? (imageRepository = new ImageRepository(transaction));
 
         /// <inheritdoc/>
         public void Commit()
@@ -60,23 +49,13 @@ namespace MiniBlog.Core.DataAccess.UoW.Dapper
             }
         }
 
-        /// <inheritdoc/>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
 
-        private void Dispose(bool disposing)
+        public void Dispose()
         {
             if (!disposed)
             {
-                if (disposing)
-                {
-                    transaction?.Dispose();
-                    connection?.Dispose();
-                }
-
+                transaction?.Dispose();
+                connection?.Dispose();
                 disposed = true;
             }
         }
