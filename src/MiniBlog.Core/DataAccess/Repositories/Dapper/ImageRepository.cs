@@ -42,7 +42,7 @@ namespace MiniBlog.Core.DataAccess.Repositories.Dapper
         }
 
         /// <inheritdoc/>
-        public IQueryable<Image> GetEntities()
+        public IQueryable<Image> All()
         {
             return Connection.Query<Image>("SELECT * FROM public.images ORDER BY id ASC", Transaction).AsQueryable();
         }

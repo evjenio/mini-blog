@@ -45,7 +45,7 @@ namespace MiniBlog.Core.DataAccess.Repositories.Dapper
         }
 
         /// <inheritdoc/>
-        public IQueryable<Article> GetEntities()
+        public IQueryable<Article> All()
         {
             return Connection.Query<Article>("SELECT id, header FROM public.articles ORDER BY id ASC").AsQueryable();
         }

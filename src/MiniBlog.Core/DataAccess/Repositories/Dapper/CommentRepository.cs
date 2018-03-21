@@ -61,7 +61,7 @@ namespace MiniBlog.Core.DataAccess.Repositories.Dapper
         }
 
         /// <inheritdoc/>
-        public IQueryable<Comment> GetEntities()
+        public IQueryable<Comment> All()
         {
             return Connection.Query<Comment>("SELECT * FROM public.comments ORDER BY id ASC", Transaction).AsQueryable();
         }

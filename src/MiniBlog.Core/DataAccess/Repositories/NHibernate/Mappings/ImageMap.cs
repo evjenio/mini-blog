@@ -9,7 +9,12 @@ namespace MiniBlog.Core.DataAccess.Repositories.NHibernate.Mappings
         public ImageMap()
         {
             Table("images");
-            Id(x => x.Id, m => m.Generator(Generators.Foreign<Image>(i => i.Article)));
+            Id(x => x.Id,
+                m => m.Generator(Generators.Identity,
+                    g => g.Params(new
+                    {
+                        sequence = "images_id_seq"
+                    })));
             Property(x => x.ImageFile);
         }
     }

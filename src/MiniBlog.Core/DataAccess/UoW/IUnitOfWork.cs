@@ -6,14 +6,19 @@ namespace MiniBlog.Core.DataAccess.UoW
 {
     /// <inheritdoc />
     /// <summary>
-    /// Unit of work
+    /// Unit of work.
     /// </summary>
     public interface IUnitOfWork : IDisposable
     {
+        /// <summary>
+        /// Repository for entity.
+        /// </summary>
+        /// <typeparam name="TEntity">Entity type</typeparam>
+        /// <returns>Entity</returns>
         IRepository<TEntity> RepositoryFor<TEntity>() where TEntity : IEntity;
 
         /// <summary>
-        /// Commit changes
+        /// Commit changes.
         /// </summary>
         void Commit();
     }

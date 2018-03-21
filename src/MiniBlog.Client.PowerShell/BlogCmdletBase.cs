@@ -5,14 +5,24 @@ using MiniBlog.ServiceClient.Integration;
 
 namespace MiniBlog.Client.PowerShell
 {
+    /// <summary>
+    /// Abstract command-let.
+    /// </summary>
     public abstract class BlogCmdletBase : Cmdlet
     {
+        /// <summary>
+        /// Service client.
+        /// </summary>
         protected BlogServiceClient Client;
 
+        /// <summary>
+        /// Service url.
+        /// </summary>
         [Parameter]
         [Alias("s")]
         public string ServiceUrl { get; set; } = "http://localhost:49542/Services/BlogService.svc";
 
+        /// <inheritdoc />
         protected override void BeginProcessing()
         {
             base.BeginProcessing();
@@ -21,6 +31,7 @@ namespace MiniBlog.Client.PowerShell
             WriteVerbose($"Connecting to {ServiceUrl} ...");
         }
 
+        /// <inheritdoc />
         protected override void EndProcessing()
         {
             base.EndProcessing();

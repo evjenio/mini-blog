@@ -14,7 +14,7 @@ namespace MiniBlog.Core.DataAccess.Repositories.Dapper
         /// <param name="transaction">Transaction</param>
         protected Repository(IDbTransaction transaction)
         {
-            this.Transaction = transaction;
+            Transaction = transaction;
         }
 
         /// <summary>

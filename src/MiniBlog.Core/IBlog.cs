@@ -2,6 +2,9 @@
 
 namespace MiniBlog.Core
 {
+    /// <summary>
+    /// Blog interface.
+    /// </summary>
     public interface IBlog
     {
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Web;
 using Autofac;
 using Autofac.Integration.Wcf;
@@ -49,16 +50,26 @@ namespace MiniBlog.WCF
 
             builder.RegisterType<Blog>().As<IBlog>().SingleInstance();
 
-            builder.Register<ILogger>(c => new LoggerConfiguration()
-                    .MinimumLevel.Verbose()
-                    .WriteTo.File("log.txt")
-                    .WriteTo.Seq("http://localhost:5341")
-                    .CreateLogger())
+            var logger = new LoggerConfiguration()
+                .MinimumLevel.Verbose()
+                .WriteTo.Seq("http://localhost:5341")
+                .CreateLogger();
+
+            builder.Register<ILogger>(c => logger)
                 .SingleInstance();
 
             // Set the dependency resolver.
             var container = builder.Build();
             AutofacHostFactory.Container = container;
+
+            // To log NH to Serilog
+            AddTraceListener(logger);
+        }
+
+        private void AddTraceListener(ILogger logger)
+        {
+            var listener = new SerilogTraceListener.SerilogTraceListener(logger);
+            Trace.Listeners.Add(listener);
         }
     }
 }

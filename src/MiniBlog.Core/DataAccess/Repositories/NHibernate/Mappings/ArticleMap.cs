@@ -9,13 +9,26 @@ namespace MiniBlog.Core.DataAccess.Repositories.NHibernate.Mappings
         public ArticleMap()
         {
             Table("articles");
-            Id(x => x.Id, m => m.Generator(Generators.Identity));
+            Id(x => x.Id,
+                m => m.Generator(Generators.Identity,
+                    g => g.Params(new
+                    {
+                        sequence = "articles_id_seq"
+                    })));
             Property(x => x.Header);
             Property(x => x.Content, m => m.Lazy(true));
+            Set(x => x.Comments,
+                map =>
+                {
+                    map.Key(k => k.Column("ArticleId"));
+                    map.Fetch(CollectionFetchMode.Subselect);
+                    map.Lazy(CollectionLazy.Lazy);
+                },
+                m => m.OneToMany(p => p.Class(typeof(Comment))));
             OneToOne(x => x.Image,
                 m =>
                 {
-                    m.Lazy(LazyRelation.Proxy);
+                    m.Constrained(false);
                 });
         }
     }

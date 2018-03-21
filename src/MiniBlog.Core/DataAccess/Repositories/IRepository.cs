@@ -37,7 +37,7 @@ namespace MiniBlog.Core.DataAccess.Repositories
         /// Gets all entities.
         /// </summary>
         /// <returns>List of entities</returns>
-        IQueryable<TEntity> GetEntities();
+        IQueryable<TEntity> All();
 
         /// <summary>
         /// Updates entity.

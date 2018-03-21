@@ -24,6 +24,11 @@ namespace MiniBlog.Core.DataAccess.UoW.NHibernate
             transaction = session.BeginTransaction();
         }
 
+        /// <summary>
+        /// Repository for entity.
+        /// </summary>
+        /// <typeparam name="TEntity">Entity type</typeparam>
+        /// <returns>Entity</returns>
         public IRepository<TEntity> RepositoryFor<TEntity>()
             where TEntity : IEntity
         {

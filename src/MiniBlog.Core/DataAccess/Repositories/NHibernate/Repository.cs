@@ -28,7 +28,7 @@ namespace MiniBlog.Core.DataAccess.Repositories.NHibernate
             return Session.Get<TEntity>(id);
         }
 
-        public IQueryable<TEntity> GetEntities()
+        public IQueryable<TEntity> All()
         {
             return Session.Query<TEntity>();
         }

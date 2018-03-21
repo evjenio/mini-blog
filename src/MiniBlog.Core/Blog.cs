@@ -11,12 +11,21 @@ using Serilog;
 
 namespace MiniBlog.Core
 {
+    /// <summary>
+    /// Blog (service).
+    /// </summary>
     public class Blog : IBlog
     {
         private readonly IUnitOfWorkFactory unitOfWorkFactory;
         private readonly IObjectMapper objectMapper;
         private readonly ILogger logger;
 
+        /// <summary>
+        /// C-tor.
+        /// </summary>
+        /// <param name="unitOfWorkFactory">UoW factory.</param>
+        /// <param name="objectMapper">Object mapper.</param>
+        /// <param name="logger">Logger.</param>
         public Blog(IUnitOfWorkFactory unitOfWorkFactory, IObjectMapper objectMapper, ILogger logger)
         {
             this.unitOfWorkFactory = unitOfWorkFactory;
@@ -24,6 +33,9 @@ namespace MiniBlog.Core
             this.logger = logger;
         }
 
+        /// <summary>
+        /// Adds article.
+        /// </summary>
         public void AddArticle(ArticleDto article)
         {
             if (article == null)
@@ -32,7 +44,7 @@ namespace MiniBlog.Core
             }
 
             logger.Verbose("Adding article: {@article}", article);
-            var mappedArticle = objectMapper.Map<ArticleDto, Article>(article);
+            var mappedArticle = objectMapper.Map<Article>(article);
 
             using (var unitOfWork = unitOfWorkFactory.Create())
             {
@@ -44,6 +56,10 @@ namespace MiniBlog.Core
             }
         }
 
+        /// <summary>
+        /// Adds comment.
+        /// </summary>
+        /// <param name="comment">Comment object</param>
         public void AddComment(CommentDto comment)
         {
             if (comment == null)
@@ -53,7 +69,7 @@ namespace MiniBlog.Core
 
             logger.Verbose("Adding comment {@comment}", comment);
 
-            var mappedComment = objectMapper.Map<CommentDto, Comment>(comment);
+            var mappedComment = objectMapper.Map<Comment>(comment);
 
             using (var unitOfWork = unitOfWorkFactory.Create())
             {
@@ -64,6 +80,10 @@ namespace MiniBlog.Core
             }
         }
 
+        /// <summary>
+        /// Deletes article.
+        /// </summary>
+        /// <param name="articleId">Article identity</param>
         public void DeleteArticle(int articleId)
         {
             logger.Verbose("Deleting article {articleId}", articleId);
@@ -75,29 +95,36 @@ namespace MiniBlog.Core
             }
         }
 
+        /// <summary>
+        /// Gets article.
+        /// </summary>
+        /// <param name="articleId">Article identity</param>
+        /// <returns>Article object</returns>
         public ArticleDto GetArticle(int articleId)
         {
             using (var unitOfWork = unitOfWorkFactory.Create())
             {
-                var article = unitOfWork.RepositoryFor<Article>()
-                    .GetEntities()
-                    .Fetch(x => x.Comments)
-                    .FirstOrDefault(a => a.Id == articleId);
-
+                var article = unitOfWork.RepositoryFor<Article>().Get(articleId);
                 unitOfWork.Commit();
-                var mappedArticle = objectMapper.Map<Article, ArticleDto>(article);
+                var mappedArticle = objectMapper.Map<ArticleDto>(article);
                 return mappedArticle;
             }
         }
 
+        /// <summary>
+        /// Gets articles.
+        /// </summary>
+        /// <returns>List of articles</returns>
         public ArticlePreviewDto[] GetArticlePreviews()
         {
             using (var unitOfWork = unitOfWorkFactory.Create())
             {
                 IEnumerable<Article> articles = unitOfWork.RepositoryFor<Article>()
-                    .GetEntities().ToList();
+                    .All()
+                    .Fetch(x => x.Image)
+                    .ToList();
                 unitOfWork.Commit();
-                return objectMapper.Map<IEnumerable<Article>, ArticlePreviewDto[]>(articles);
+                return objectMapper.Map<ArticlePreviewDto[]>(articles);
             }
         }
     }

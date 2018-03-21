@@ -1,8 +1,14 @@
 ﻿using System;
+using System.Data;
 using MiniBlog.Core.DataAccess.Repositories.NHibernate.Mappings;
 using NHibernate;
+using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
+using NHibernate.Connection;
+using NHibernate.Dialect;
+using NHibernate.Driver;
 using NHibernate.Mapping.ByCode;
+using NHibernate.Tool.hbm2ddl;
 
 namespace MiniBlog.Core.DataAccess.Infrastructure.NHibernate
 {
@@ -13,13 +19,29 @@ namespace MiniBlog.Core.DataAccess.Infrastructure.NHibernate
     {
         public static ISessionFactory Build()
         {
+            var configuration = new Configuration();
+            configuration.DataBaseIntegration(db =>
+            {
+                db.Dialect<PostgreSQLDialect>();
+                db.Driver<NpgsqlDriver>();
+                db.ConnectionProvider<DriverConnectionProvider>();
+                db.IsolationLevel = IsolationLevel.ReadCommitted;
+
+                db.ConnectionStringName = "database";
+                db.Timeout = 10;
+
+                // enabled for testing
+                db.LogFormattedSql = true;
+                db.LogSqlInConsole = true;
+                db.AutoCommentSql = true;
+            });
+
             var mapper = new ModelMapper();
             mapper.AddMappings(typeof(ArticleMap).Assembly.ExportedTypes);
-            HbmMapping mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
+            var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
 
-            var configuration = new global::NHibernate.Cfg.Configuration();
             configuration.AddMapping(mapping);
-            configuration.Configure();
+            SchemaMetadataUpdater.QuoteTableAndColumns(configuration, new PostgreSQLDialect());
             return configuration.BuildSessionFactory();
         }
     }
