@@ -1,5 +1,7 @@
 ﻿using System;
-using Mapster;
+using AutoMapper;
+using MiniBlog.Contract;
+using MiniBlog.Core.Domain;
 
 namespace MiniBlog.Core.Mappers
 {
@@ -8,15 +10,29 @@ namespace MiniBlog.Core.Mappers
     /// </summary>
     public class ObjectMapper : IObjectMapper
     {
+        static ObjectMapper()
+        {
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Article, ArticlePreviewDto>();
+                cfg.CreateMap<ArticlePreviewDto, Article>();
+
+                cfg.CreateMap<Article, ArticleDto>();
+                cfg.CreateMap<ArticleDto, Article>();
+
+                cfg.CreateMap<Comment, CommentDto>();
+                cfg.CreateMap<CommentDto, Comment>();
+            });
+        }
         /// <summary>
-        /// Map from TSource to TDestination.
+        /// Map from source to TDestination.
         /// </summary>
         /// <typeparam name="TDestination">Destination type</typeparam>
         /// <param name="source">Source object</param>
         /// <returns>Destination object</returns>
         public TDestination Map<TDestination>(object source)
         {
-            return source.Adapt<TDestination>();
+            return Mapper.Map<TDestination>(source);
         }
     }
 }

@@ -25,10 +25,10 @@ namespace MiniBlog.Core.DataAccess.Repositories.NHibernate.Mappings
                     map.Lazy(CollectionLazy.Lazy);
                 },
                 m => m.OneToMany(p => p.Class(typeof(Comment))));
-            OneToOne(x => x.Image,
+            ManyToOne(x => x.Image,
                 m =>
                 {
-                    m.Constrained(false);
+                    m.Column("ImageId");
                 });
         }
     }

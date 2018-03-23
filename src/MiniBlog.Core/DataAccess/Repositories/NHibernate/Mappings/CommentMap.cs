@@ -18,6 +18,11 @@ namespace MiniBlog.Core.DataAccess.Repositories.NHibernate.Mappings
                     })));
             Property(x => x.CommentText);
             Property(x => x.UserName);
+            ManyToOne(x => x.Article,
+                m =>
+                {
+                    m.Column("ArticleId");
+                });
         }
     }
 }

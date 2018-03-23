@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using MiniBlog.Contract;
 using MiniBlog.Core;
 using MiniBlog.Core.DataAccess.Repositories;
@@ -14,23 +16,23 @@ namespace MiniBlog.Tests
     [TestFixture]
     public class BlogTest
     {
-        private IArticleRepository articleRepository;
+        private IRepository<Article> articleRepository;
         private IBlog blog;
-        private ICommentRepository commentRepository;
-        private IImageRepository imageRepository;
+        private IRepository<Comment> commentRepository;
+        private IRepository<Image> imageRepository;
         private Mock<IUnitOfWork> uowMock;
 
         [SetUp]
         public void Setup()
         {
-            articleRepository = Mock.Of<IArticleRepository>();
-            commentRepository = Mock.Of<ICommentRepository>();
-            imageRepository = Mock.Of<IImageRepository>();
+            articleRepository = Mock.Of<IRepository<Article>>();
+            commentRepository = Mock.Of<IRepository<Comment>>();
+            imageRepository = Mock.Of<IRepository<Image>>();
 
             uowMock = new Mock<IUnitOfWork>();
-            uowMock.Setup(x => x.ArticleRepository).Returns(articleRepository);
-            uowMock.Setup(x => x.CommentRepository).Returns(commentRepository);
-            uowMock.Setup(x => x.ImageRepository).Returns(imageRepository);
+            uowMock.Setup(x => x.RepositoryFor<Article>()).Returns(articleRepository);
+            uowMock.Setup(x => x.RepositoryFor<Comment>()).Returns(commentRepository);
+            uowMock.Setup(x => x.RepositoryFor<Image>()).Returns(imageRepository);
 
             var factoryMock = new Mock<IUnitOfWorkFactory>();
             factoryMock.Setup(f => f.Create()).Returns(uowMock.Object);
@@ -39,14 +41,11 @@ namespace MiniBlog.Tests
         }
 
         [Test]
-        [TestCase(true, 1)]
-        [TestCase(false, 0)]
-        public void AddArticleTest(bool withImage, int imagesAddedCount)
+        public void AddArticleTest()
         {
             var article = new ArticleDto()
             {
                 Id = 42,
-                Image = withImage ? new byte[2] : null,
                 Header = "Head",
                 Content = "Content"
             };
@@ -56,10 +55,6 @@ namespace MiniBlog.Tests
             Mock.Get(articleRepository)
                 .Verify(repo => repo.Add(It.IsAny<Article>()), Times.Once);
             Mock.Get(articleRepository).VerifyNoOtherCalls();
-
-            Mock.Get(imageRepository)
-                .Verify(repo => repo.Add(It.IsAny<Image>()), Times.Exactly(imagesAddedCount));
-            Mock.Get(imageRepository).VerifyNoOtherCalls();
 
             uowMock.Verify(x => x.Commit(), Times.Once);
         }
@@ -74,11 +69,12 @@ namespace MiniBlog.Tests
                 UserName = "User"
             };
 
+            Mock.Get(articleRepository).Setup(x => x.Get(123)).Returns(new Article() { Id = 123, Comments = new List<Comment>()});
+
             blog.AddComment(comment);
 
-            Mock.Get(commentRepository)
-                .Verify(repo => repo.Add(It.IsAny<Comment>()), Times.Once);
-            Mock.Get(commentRepository).VerifyNoOtherCalls();
+            Mock.Get(articleRepository).Verify(repo => repo.Get(123), Times.Once);
+            Mock.Get(articleRepository).Verify(repo => repo.Update(It.IsAny<Article>()), Times.Once);
 
             uowMock.Verify(x => x.Commit(), Times.Once);
         }
@@ -86,41 +82,26 @@ namespace MiniBlog.Tests
         [Test]
         public void DeleteArticleTest()
         {
+            Mock.Get(articleRepository).Setup(x => x.Get(54)).Returns(new Article() { Id = 54 });
             blog.DeleteArticle(54);
 
-            Mock.Get(articleRepository).Verify(x => x.Delete(It.Is<int>(i => i == 54)), Times.Once);
+            Mock.Get(articleRepository).Verify(x => x.Get(It.Is<int>(id => id == 54)), Times.Once);
+            Mock.Get(articleRepository).Verify(x => x.Delete(It.Is<Article>(a => a.Id == 54)), Times.Once);
             Mock.Get(articleRepository).VerifyNoOtherCalls();
 
             uowMock.Verify(x => x.Commit(), Times.Once);
         }
 
         [Test]
-        public void GetArticlePreviewsTest()
-        {
-            ArticlePreviewDto[] articles = blog.GetArticlePreviews();
-
-            Mock.Get(articleRepository).Verify(x => x.GetEntities(), Times.Once);
-            Mock.Get(articleRepository).VerifyNoOtherCalls();
-        }
-
-        [Test]
-        [TestCase(true, 1)]
-        [TestCase(false, 0)]
-        public void GetArticleTest(bool withImage, int imagesLoadedCount)
+        public void GetArticleTest()
         {
             var artMock = Mock.Get(articleRepository);
-            artMock.Setup(x => x.Get(21)).Returns(new Article() { ImageId = withImage ? 5 : default(int?) });
-
-            var imgMock = Mock.Get(imageRepository);
-            imgMock.Setup(x => x.Get(5)).Returns(new Image());
+            artMock.Setup(x => x.Get(21)).Returns(new Article() { Image = new Image() { Id = 5 } });
 
             var article = blog.GetArticle(21);
 
             artMock.Verify(x => x.Get(It.Is<int>(i => i == 21)), Times.Once);
             artMock.VerifyNoOtherCalls();
-
-            imgMock.Verify(x => x.Get(It.Is<int>(i => i == 5)), Times.Exactly(imagesLoadedCount));
-            imgMock.VerifyNoOtherCalls();
         }
     }
 }

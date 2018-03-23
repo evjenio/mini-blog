@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="Dapper" Version="1.50.4" />
-    <PackageReference Include="Mapster" Version="3.1.8" />
     <PackageReference Include="Nelibur.Sword" Version="3.1.8" />
     <PackageReference Include="NHibernate" Version="5.1.0" />
     <PackageReference Include="Npgsql" Version="3.2.7" />

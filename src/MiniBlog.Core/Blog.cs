@@ -119,10 +119,10 @@ namespace MiniBlog.Core
         {
             using (var unitOfWork = unitOfWorkFactory.Create())
             {
-                IEnumerable<Article> articles = unitOfWork.RepositoryFor<Article>()
+                Article[] articles = unitOfWork.RepositoryFor<Article>()
                     .All()
                     .Fetch(x => x.Image)
-                    .ToList();
+                    .ToArray();
                 unitOfWork.Commit();
                 return objectMapper.Map<ArticlePreviewDto[]>(articles);
             }
